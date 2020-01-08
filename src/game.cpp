@@ -9,12 +9,12 @@ void Game::initialize()
 {
     m_window.create(sf::VideoMode(800, 800), m_name);
     m_window.setFramerateLimit(FRAME_RATE);
-
-    m_running = true;
 }
 
 void Game::start()
 {
+    m_running = true;
+
     loop();
 }
 

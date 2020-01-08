@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.8)
 
 if(DEFINED ENV{VCPKG_ROOT} AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
     set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
@@ -7,12 +7,11 @@ endif()
 
 project(SFMLTest)
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
 find_package(SFML REQUIRED COMPONENTS graphics window)
 
 add_executable(SFMLTest src/main.cpp)
+
+set_property(TARGET SFMLTest PROPERTY CXX_STANDARD 17)
 
 add_subdirectory(src)
 

@@ -2,17 +2,17 @@
 #define SFMLTEST_UIELEMENT_HPP
 
 #include <SFML/Graphics/Shape.hpp>
-#include <memory>
 
-class UIElement : public sf::Shape, public std::enable_shared_from_this<UIElement> {
+class UIElement : public sf::Shape {
 
-    using Ptr = std::shared_ptr<UIElement>;
-    using ClickHandler = std::function<void(UIElement::Ptr)>;
-    using HoverHandler = std::function<void(UIElement::Ptr)>;
+    using ClickHandler = std::function<void()>;
+    using HoverHandler = std::function<void()>;
 
 public:
     void bindClick(const ClickHandler& handler);
     void bindHover(const HoverHandler& handler);
+
+    void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
     virtual void onClick();
     virtual void onHover();
