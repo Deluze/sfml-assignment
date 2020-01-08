@@ -3,7 +3,7 @@
 
 class Loopable {
 public:
-    virtual void loop();
+    virtual void loop() {};
 };
 
 #endif //SFMLTEST_LOOPABLE_HPP

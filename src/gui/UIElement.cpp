@@ -21,8 +21,3 @@ void UIElement::onHover()
 {
     m_hoverHandler();
 }
-
-void UIElement::draw(sf::RenderTarget &target, sf::RenderStates states) const
-{
-    throw CantBeDrawnException();
-}

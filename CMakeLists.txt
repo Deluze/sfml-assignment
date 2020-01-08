@@ -10,10 +10,12 @@ project(SFMLTest)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(SFML REQUIRED COMPONENTS graphics window)
+find_package(SFML REQUIRED COMPONENTS graphics window system)
 
 add_executable(SFMLTest src/main.cpp)
 
 add_subdirectory(src)
 
-target_link_libraries(SFMLTest sfml-graphics sfml-window)
+file(COPY asset DESTINATION ./)
+
+target_link_libraries(SFMLTest sfml-graphics sfml-window sfml-system)

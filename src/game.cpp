@@ -1,4 +1,7 @@
 #include "game.hpp"
+#include "gui/button.hpp"
+
+#include <SFML/Graphics/RectangleShape.hpp>
 
 Game::Game(const char* name) : m_name(name), m_running(false)
 {
@@ -26,6 +29,12 @@ void Game::stop()
 
 void Game::loop()
 {
+
+    Button button{{100, 20}, "Hello"};
+
+    button.setBackgroundColor(sf::Color::Green);
+    button.setTextColor(sf::Color::White);
+
     /**
      * Main thread loop. Used for UI/Events
      */
@@ -33,6 +42,7 @@ void Game::loop()
     {
         m_window.clear();
 
+        m_window.draw(button);
         /**
          * Do shit :P
          */

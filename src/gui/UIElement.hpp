@@ -1,10 +1,12 @@
 #ifndef SFMLTEST_UIELEMENT_HPP
 #define SFMLTEST_UIELEMENT_HPP
 
-#include <SFML/Graphics/Shape.hpp>
 #include <functional>
 
-class UIElement : public sf::Shape {
+#include <SFML/Graphics/Drawable.hpp>
+#include <SFML/Graphics/Transformable.hpp>
+
+class UIElement : public sf::Transformable {
 
     using ClickHandler = std::function<void()>;
     using HoverHandler = std::function<void()>;
@@ -12,8 +14,6 @@ class UIElement : public sf::Shape {
 public:
     void bindClick(const ClickHandler& handler);
     void bindHover(const HoverHandler& handler);
-
-    void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
     virtual void onClick();
     virtual void onHover();
