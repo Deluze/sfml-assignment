@@ -2,6 +2,7 @@
 #define SFMLTEST_UIELEMENT_HPP
 
 #include <SFML/Graphics/Shape.hpp>
+#include <functional>
 
 class UIElement : public sf::Shape {
 
