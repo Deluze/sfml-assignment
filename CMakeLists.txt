@@ -16,7 +16,7 @@ add_executable(SFMLTest src/main.cpp)
 
 add_subdirectory(src)
 
-# This will always be there.. for safety I guess
+# This will always be there.. for linux and perhaps other platforms.
 add_custom_command(
         TARGET SFMLTest
         POST_BUILD
@@ -26,14 +26,12 @@ add_custom_command(
 )
 
 if(WIN32)
-    #Only Debug build now
-    #therefore..
     add_custom_command(
             TARGET SFMLTest
             POST_BUILD
             COMMAND ${CMAKE_COMMAND} -E copy_directory
             ${CMAKE_SOURCE_DIR}/asset
-            $<TARGET_FILE_DIR:SFMLTest>/Debug/asset
+            $<TARGET_FILE_DIR:SFMLTest>/${CMAKE_BUILD_TYPE}/asset
     )
 endif()
 
