@@ -26,17 +26,12 @@ add_custom_command(
 )
 
 if(WIN32)
-
     #Only Debug build now
-
     #therefore..
-    set(CMAKE_CONFIGURATION_TYPES "Debug" CACHE STRING "" FORCE)
-
     add_custom_command(
             TARGET SFMLTest
             POST_BUILD
             COMMAND ${CMAKE_COMMAND} -E copy_directory
-            COMMENT HELLO
             ${CMAKE_SOURCE_DIR}/asset
             $<TARGET_FILE_DIR:SFMLTest>/Debug/asset
     )
