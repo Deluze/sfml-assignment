@@ -16,12 +16,31 @@ add_executable(SFMLTest src/main.cpp)
 
 add_subdirectory(src)
 
+# This will always be there.. for safety I guess
 add_custom_command(
         TARGET SFMLTest
         POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory
-        ${PROJECT_SOURCE_DIR}/asset
-        ${CMAKE_BINARY_DIR}/asset
+        ${CMAKE_SOURCE_DIR}/asset
+        $<TARGET_FILE_DIR:SFMLTest>/asset
 )
+
+if(WIN32)
+
+    #Only Debug build now
+
+    #therefore..
+    set(CMAKE_CONFIGURATION_TYPES "Debug" CACHE STRING "" FORCE)
+
+    add_custom_command(
+            TARGET SFMLTest
+            POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_directory
+            COMMENT HELLO
+            ${CMAKE_SOURCE_DIR}/asset
+            $<TARGET_FILE_DIR:SFMLTest>/Debug/asset
+    )
+endif()
+
 
 target_link_libraries(SFMLTest sfml-graphics sfml-window sfml-system)
