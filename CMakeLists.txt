@@ -16,6 +16,12 @@ add_executable(SFMLTest src/main.cpp)
 
 add_subdirectory(src)
 
-file(COPY asset DESTINATION ./)
+add_custom_command(
+        TARGET SFMLTest
+        POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${PROJECT_SOURCE_DIR}/asset
+        ${CMAKE_BINARY_DIR}/asset
+)
 
 target_link_libraries(SFMLTest sfml-graphics sfml-window sfml-system)
