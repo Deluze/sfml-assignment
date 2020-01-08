@@ -6,6 +6,14 @@ if(DEFINED ENV{VCPKG_ROOT} AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
 endif()
 
 project(SFMLTest)
-find_package(SFML REQUIRED COMPONENTS audio graphics)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
+
+find_package(SFML REQUIRED COMPONENTS graphics)
+
 add_executable(SFMLTest src/main.cpp)
-target_link_libraries(SFMLTest sfml-audio sfml-graphics)
+
+add_subdirectory(src)
+
+target_link_libraries(SFMLTest sfml-graphics)
