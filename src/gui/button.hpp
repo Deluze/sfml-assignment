@@ -11,11 +11,13 @@
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Graphics/Font.hpp>
+#include <SFML/Graphics/Text.hpp>
+#include <SFML/Graphics/RectangleShape.hpp>
 
 class Button : public UIElement, public sf::Drawable {
 public:
 
-    explicit Button(const sf::Vector2f& vector, const char* text);
+    explicit Button(sf::RectangleShape rectangleShape, const char* text);
 
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
@@ -30,12 +32,15 @@ public:
     void onHover() override;
 
 private:
+    // If true, this UIElement does not fire events.
     bool m_disabled;
-    std::string m_text;
-    sf::Color m_backgroundColor;
-    sf::Color m_textColor;
-    sf::Vector2f m_vector;
+
+    // The child text of the button
+    sf::Text m_text;
     sf::Font m_font;
+
+    // How to do this otherwise? We need to attach children to our button, but inheriting from shapes directly makes draw method inaccessible
+    sf::RectangleShape m_rectangle;
 };
 
 #endif //SFMLTEST_BUTTON_HPP

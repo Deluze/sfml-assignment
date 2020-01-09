@@ -29,11 +29,14 @@ void Game::stop()
 
 void Game::loop()
 {
+    Button button{sf::RectangleShape({
+        400, 500
+    }), "Text"};
 
-    Button button{{100, 20}, "Hello"};
-
-    button.setBackgroundColor(sf::Color::Green);
+    button.setBackgroundColor(sf::Color::Magenta);
     button.setTextColor(sf::Color::White);
+
+    button.setPosition(30.f, 50.f);
 
     /**
      * Main thread loop. Used for UI/Events
@@ -42,7 +45,10 @@ void Game::loop()
     {
         m_window.clear();
 
+        button.move(.1f, .1f);
+
         m_window.draw(button);
+
         /**
          * Do shit :P
          */
