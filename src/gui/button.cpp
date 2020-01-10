@@ -8,7 +8,7 @@ Button::Button(sf::Text text, float width, float height) : UIElement({width, hei
         width, height
     });
 
-    m_text.setPosition((width - m_text.getLocalBounds().width) / 2, (height - m_text.getLocalBounds().height) / 2);
+    m_text.setPosition((width - m_text.getGlobalBounds().width) / 2, (height - m_text.getGlobalBounds().height) / 2 - 3);
 }
 
 void Button::setDisabled(const bool &disabled) {

@@ -25,6 +25,7 @@ public:
         m_scene->onEnter();
     }
 
+    void fixedUpdate(Game* game);
     void update(Game* game);
     void draw(sf::RenderWindow& window) const;
 private:

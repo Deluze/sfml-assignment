@@ -14,17 +14,17 @@ class MainMenuScene : public Scene {
 public:
     MainMenuScene();
 
-    void update(Game *game) override;
     void draw(sf::RenderWindow &window) const override;
-    void onEnter() override;
 private:
-    Button m_button;
-    Button m_button2;
 
-    sf::Text m_buttonText;
-    sf::Text m_button2Text;
+    sf::Text m_playButtonText;
+    Button m_playButton;
 
-    void buttonClick();
+    sf::Text m_quitButtonText;
+    Button m_quitButton;
+
+    void onPlay();
+    void onQuit();
 };
 
 

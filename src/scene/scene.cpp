@@ -2,6 +2,10 @@
 #include "../game.hpp"
 
 #include <SFML/Window/Mouse.hpp>
+#include <iostream>
+
+void Scene::fixedUpdate(Game* game) {
+}
 
 void Scene::update(Game *game) {
 

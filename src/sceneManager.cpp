@@ -11,3 +11,7 @@ void SceneManager::update(Game *game) {
 void SceneManager::draw(sf::RenderWindow& window) const {
     m_scene->draw(window);
 }
+
+void SceneManager::fixedUpdate(Game* game) {
+    m_scene->fixedUpdate(game);
+}

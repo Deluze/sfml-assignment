@@ -21,6 +21,9 @@ public:
         m_font.loadFromFile("asset/font/Arial.ttf");
     }
 
+    // This method is always called 60 times a second.
+    virtual void fixedUpdate(Game* game);
+
     // This method should always be called, if inherited. Since this will listen to events and UI states.
     virtual void update(Game* game);
 

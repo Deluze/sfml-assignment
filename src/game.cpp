@@ -1,6 +1,8 @@
 #include "game.hpp"
 #include "scene/mainMenuScene.hpp"
 
+#include <iostream>
+
 Game::Game(const char* name) : m_name(name), m_running(false)
 {
 
@@ -9,7 +11,7 @@ Game::Game(const char* name) : m_name(name), m_running(false)
 void Game::initialize()
 {
     m_window.create(sf::VideoMode(800, 800), m_name);
-    m_window.setFramerateLimit(FRAME_RATE);
+//    m_window.setFramerateLimit(FRAME_RATE);
 }
 
 void Game::start()
@@ -31,12 +33,23 @@ void Game::stop()
 void Game::loop()
 {
 
+    sf::Clock clock;
+    sf::Uint32 lastFrame;
+
     /**
      * Main thread loop. Used for UI/Events
      */
     while(m_running)
     {
         m_window.clear();
+
+        lastFrame = clock.getElapsedTime().asMilliseconds();
+
+        if(lastFrame >= (1000 / DELTA_TICKS))
+        {
+            clock.restart();
+            m_sceneManager.fixedUpdate(this);
+        }
 
         m_sceneManager.update(this);
         m_sceneManager.draw(m_window);

@@ -1,39 +1,41 @@
 #include "mainMenuScene.hpp"
 
-void MainMenuScene::update(Game *game)
-{
-    m_button2.move(1, 0);
-
-    Scene::update(game);
-}
-
-void MainMenuScene::draw(sf::RenderWindow &window) const {
-    window.draw(m_button);
-    window.draw(m_button2);
-}
-
 MainMenuScene::MainMenuScene() : Scene()
 {
-    m_buttonText.setFont(m_font);
-    m_button2Text.setFont(m_font);
+    m_playButtonText = createElement<sf::Text>();
+    m_playButtonText.setFont(m_font);
+    m_playButtonText.setString("Play!");
 
-    m_buttonText.setString(":P");
-    m_buttonText.setCharacterSize(10);
+    m_playButton = createElement<Button>(m_playButtonText, 200, 50);
+    m_playButton.setBackgroundColor(sf::Color{214, 47, 75});
+    m_playButton.setPosition(0, 100);
+    m_playButton.bindClick([this]() {onPlay();});
 
-    m_button = createElement<Button>(m_buttonText);
+    registerElement(&m_playButton);
 
-    m_button.bindClick([this]() { m_button.setBackgroundColor(sf::Color::Magenta); });
+    m_quitButtonText = createElement<sf::Text>();
+    m_quitButtonText.setFont(m_font);
+    m_quitButtonText.setString("Quit");
+    m_quitButtonText.setCharacterSize(15);
 
-    registerElement(&m_button);
+    m_quitButton = createElement<Button>(m_quitButtonText, 150, 20);
+    m_quitButton.setBackgroundColor(sf::Color{122, 20, 37});
+    m_quitButton.setPosition(0, 175);
+    m_quitButton.bindClick([this]() {onQuit();});
 
-    m_button2.setBackgroundColor(sf::Color::Green);
+    registerElement(&m_quitButton);
 }
 
-void MainMenuScene::onEnter()
+void MainMenuScene::draw(sf::RenderWindow &window) const
 {
+    window.draw(m_playButton);
+    window.draw(m_quitButton);
+}
+
+void MainMenuScene::onPlay() {
 
 }
 
-void MainMenuScene::buttonClick() {
-    m_button.setBackgroundColor(sf::Color::Magenta);
+void MainMenuScene::onQuit() {
+
 }

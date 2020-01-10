@@ -7,7 +7,7 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 
-#define FRAME_RATE 30
+#define DELTA_TICKS 60
 
 class Game {
 public:
