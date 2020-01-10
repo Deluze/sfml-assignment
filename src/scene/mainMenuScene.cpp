@@ -18,7 +18,8 @@ MainMenuScene::MainMenuScene() : Scene()
     m_buttonText.setString(":P");
     m_buttonText.setCharacterSize(10);
 
-    m_button = Button(m_buttonText);
+    m_button = createElement<Button>(m_buttonText);
+
     m_button2 = Button(m_button2Text);
 
     m_button.setTextColor(sf::Color::Magenta);
@@ -27,4 +28,9 @@ MainMenuScene::MainMenuScene() : Scene()
 
 void MainMenuScene::onEnter()
 {
+
+}
+
+void MainMenuScene::buttonClick() {
+    m_button.setBackgroundColor(sf::Color::Magenta);
 }

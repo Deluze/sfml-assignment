@@ -5,6 +5,8 @@
 #include "../game.hpp"
 #include "../gui/button.hpp"
 
+#include <functional>
+
 #include <SFML/Graphics/Text.hpp>
 
 class MainMenuScene : public Scene {
@@ -21,6 +23,8 @@ private:
 
     sf::Text m_buttonText;
     sf::Text m_button2Text;
+
+    void buttonClick();
 };
 
 

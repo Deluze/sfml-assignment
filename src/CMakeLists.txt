@@ -6,6 +6,8 @@ target_sources(SFMLTest PRIVATE
         ${PATH}/loopable.hpp
         ${PATH}/sceneManager.cpp
         ${PATH}/sceneManager.hpp
+        ${PATH}/eventManager.cpp
+        ${PATH}/eventManager.hpp
 )
 
 add_subdirectory(gui)
