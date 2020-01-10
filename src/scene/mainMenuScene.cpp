@@ -24,11 +24,9 @@ MainMenuScene::MainMenuScene() : Scene()
 
     m_button.bindClick([this]() { m_button.setBackgroundColor(sf::Color::Magenta); });
 
-    registerElement<Button>(m_button);
+    registerElement(&m_button);
 
     m_button2.setBackgroundColor(sf::Color::Green);
-
-
 }
 
 void MainMenuScene::onEnter()

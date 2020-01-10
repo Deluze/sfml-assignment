@@ -30,3 +30,7 @@ void Scene::onLeave() {
 void Scene::onPause() {
 
 }
+
+void Scene::registerElement(UIElement *element) {
+    m_uiManager.registerElement(element);
+}
