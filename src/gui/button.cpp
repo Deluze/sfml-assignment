@@ -1,10 +1,12 @@
 #include "button.hpp"
 
-Button::Button(sf::RectangleShape rectangleShape, const char* text) : UIElement(), m_rectangle(rectangleShape), m_disabled(false)
+Button::Button(sf::Text text, float width, float height) : UIElement(), m_disabled(false), m_text(text)
 {
-    m_font.loadFromFile("asset/font/Arial.ttf");
-    m_text.setFont(m_font);
-    m_text.setString(text);
+    m_rectangle = sf::RectangleShape({
+        width, height
+    });
+
+    m_text.setPosition((width - m_text.getLocalBounds().width) / 2, (height - m_text.getLocalBounds().height) / 2);
 }
 
 void Button::setDisabled(const bool &disabled) {
@@ -48,4 +50,8 @@ void Button::setBackgroundColor(const sf::Color &color) {
 
 void Button::setTextColor(const sf::Color &color) {
     m_text.setFillColor(color);
+}
+
+void Button::setCharacterSize(const sf::Uint32& size) {
+    m_text.setCharacterSize(size);
 }

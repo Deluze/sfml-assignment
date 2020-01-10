@@ -1,7 +1,6 @@
 #include "game.hpp"
 #include "gui/button.hpp"
-
-#include <SFML/Graphics/RectangleShape.hpp>
+#include "scene/mainMenuScene.hpp"
 
 Game::Game(const char* name) : m_name(name), m_running(false)
 {
@@ -16,6 +15,9 @@ void Game::initialize()
 
 void Game::start()
 {
+    // default scene
+    m_sceneManager.setScene<MainMenuScene>();
+
     m_running = true;
 
     loop();
@@ -29,14 +31,6 @@ void Game::stop()
 
 void Game::loop()
 {
-    Button button{sf::RectangleShape({
-        400, 500
-    }), "Text"};
-
-    button.setBackgroundColor(sf::Color::Magenta);
-    button.setTextColor(sf::Color::White);
-
-    button.setPosition(30.f, 50.f);
 
     /**
      * Main thread loop. Used for UI/Events
@@ -45,14 +39,14 @@ void Game::loop()
     {
         m_window.clear();
 
-        button.move(.1f, .1f);
-
-        m_window.draw(button);
-
-        /**
-         * Do shit :P
-         */
+        m_sceneManager.update(this);
+        m_sceneManager.draw(m_window);
 
         m_window.display();
     }
+
+}
+
+sf::RenderWindow *Game::getWindow() {
+    return &m_window;
 }

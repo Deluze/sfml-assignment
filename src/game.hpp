@@ -1,6 +1,8 @@
 #ifndef SFMLTEST_GAME_HPP
 #define SFMLTEST_GAME_HPP
 
+#include "sceneManager.hpp"
+
 #include <string>
 
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -9,12 +11,14 @@
 
 class Game {
 public:
-    Game(const char* name);
+    explicit Game(const char* name);
     ~Game() = default;
 
     void initialize();
     void start();
     void stop();
+
+    sf::RenderWindow* getWindow();
 
 private:
 
@@ -22,6 +26,7 @@ private:
 
     sf::RenderWindow m_window;
     std::string m_name;
+    SceneManager m_sceneManager;
     bool m_running;
 };
 
