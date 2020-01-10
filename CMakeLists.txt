@@ -16,14 +16,7 @@ add_executable(SFMLTest src/main.cpp)
 
 add_subdirectory(src)
 
-# This will always be there.. for linux and perhaps other platforms.
-add_custom_command(
-        TARGET SFMLTest
-        POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_directory
-        ${CMAKE_SOURCE_DIR}/asset
-        $<TARGET_FILE_DIR:SFMLTest>/asset
-)
+file(COPY asset DESTINATION ./)
 
 if(WIN32)
     # We have to copy it to 2 locations. Since the directory context of starting an executable through VS fiddles around with the directory context.
@@ -33,9 +26,6 @@ if(WIN32)
             COMMAND ${CMAKE_COMMAND} -E copy_directory
             ${CMAKE_SOURCE_DIR}/asset
             $<TARGET_FILE_DIR:SFMLTest>/${CMAKE_BUILD_TYPE}/asset
-            COMMAND ${CMAKE_COMMAND} -E copy_directory
-            ${CMAKE_SOURCE_DIR}/asset
-            $<TARGET_FILE_DIR:SFMLTest>/asset
     )
 endif()
 
