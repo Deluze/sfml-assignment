@@ -1,5 +1,4 @@
 #include "game.hpp"
-#include "gui/button.hpp"
 #include "scene/mainMenuScene.hpp"
 
 Game::Game(const char* name) : m_name(name), m_running(false)
@@ -49,4 +48,8 @@ void Game::loop()
 
 sf::RenderWindow *Game::getWindow() {
     return &m_window;
+}
+
+SceneManager *Game::getSceneManager() {
+    return &m_sceneManager;
 }

@@ -19,6 +19,7 @@ public:
     void stop();
 
     sf::RenderWindow* getWindow();
+    SceneManager* getSceneManager();
 
 private:
 

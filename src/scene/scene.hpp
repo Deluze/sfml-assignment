@@ -1,6 +1,12 @@
 #ifndef SFMLTEST_SCENE_HPP
 #define SFMLTEST_SCENE_HPP
 
+#include "UIManager.hpp"
+#include "../eventManager.hpp"
+#include "../gui/UIElement.hpp"
+
+#include <functional>
+
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Transformable.hpp>
@@ -15,23 +21,27 @@ public:
         m_font.loadFromFile("asset/font/Arial.ttf");
     }
 
-    virtual void update(Game* game)
-    {
-        // handle events
-    };
-    virtual void draw(sf::RenderWindow& window) const {};
-    virtual void onEnter() {};
-    virtual void onLeave() {};
-    virtual void onPause() {};
+    virtual void update(Game* game);
+    virtual void draw(sf::RenderWindow& window) const;
+    virtual void onEnter();
+    virtual void onLeave();
+    virtual void onPause();
 
-    template<class Element, class ...Args>
-    Element createElement(Args... args)
+    template<class T, class ...Args>
+    T createElement(Args... args)
     {
-        return Element(args...);
+        return T(args...);
+    }
+
+    template<class T>
+    void registerElement(T& element)
+    {
+        m_uiManager.registerElement(element);
     }
 
 private:
-    std::vector<sf::Transformable*> m_transformables;
+    UIManager m_uiManager;
+    EventManager m_eventManager;
 protected:
     sf::Font m_font;
 };

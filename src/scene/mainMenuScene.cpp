@@ -3,6 +3,8 @@
 void MainMenuScene::update(Game *game)
 {
     m_button2.move(1, 0);
+
+    Scene::update(game);
 }
 
 void MainMenuScene::draw(sf::RenderWindow &window) const {
@@ -20,10 +22,13 @@ MainMenuScene::MainMenuScene() : Scene()
 
     m_button = createElement<Button>(m_buttonText);
 
-    m_button2 = Button(m_button2Text);
+    m_button.bindClick([this]() { m_button.setBackgroundColor(sf::Color::Magenta); });
 
-    m_button.setTextColor(sf::Color::Magenta);
-    m_button.setTextColor(sf::Color::Green);
+    registerElement<Button>(m_button);
+
+    m_button2.setBackgroundColor(sf::Color::Green);
+
+
 }
 
 void MainMenuScene::onEnter()

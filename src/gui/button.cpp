@@ -1,6 +1,8 @@
 #include "button.hpp"
 
-Button::Button(sf::Text text, float width, float height) : UIElement(), m_disabled(false), m_text(text)
+#include <utility>
+
+Button::Button(sf::Text text, float width, float height) : UIElement({width, height}), m_disabled(false), m_text(std::move(text))
 {
     m_rectangle = sf::RectangleShape({
         width, height
