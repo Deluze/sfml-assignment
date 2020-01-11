@@ -1,7 +1,6 @@
 #include "game.hpp"
 
 #include <SFML/Graphics/CircleShape.hpp>
-#include <SFML/Window/Event.hpp>
 
 int main()
 {

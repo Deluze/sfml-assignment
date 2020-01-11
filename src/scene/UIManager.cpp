@@ -11,8 +11,8 @@ void UIManager::resolveClick(sf::Vector2i position) {
         const auto x = static_cast<sf::Uint32>(element->getPosition().x);
         const auto y = static_cast<sf::Uint32>(element->getPosition().y);
 
-        auto width = static_cast<sf::Uint32>(element->getWidth());
-        auto height = static_cast<sf::Uint32>(element->getHeight());
+        const auto width = static_cast<sf::Uint32>(element->getWidth());
+        const auto height = static_cast<sf::Uint32>(element->getHeight());
 
         if (position.x >= x && position.x <= x + width)
         {

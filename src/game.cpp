@@ -1,8 +1,6 @@
 #include "game.hpp"
 #include "scene/mainMenuScene.hpp"
 
-#include <iostream>
-
 Game::Game(const char* name) : m_name(name), m_running(false)
 {
 
@@ -11,7 +9,6 @@ Game::Game(const char* name) : m_name(name), m_running(false)
 void Game::initialize()
 {
     m_window.create(sf::VideoMode(800, 800), m_name);
-//    m_window.setFramerateLimit(FRAME_RATE);
 }
 
 void Game::start()
@@ -35,6 +32,7 @@ void Game::loop()
 
     sf::Clock clock;
     sf::Uint32 lastFrame;
+    constexpr sf::Uint32 timeBetweenFixedUpdated = 1000 / DELTA_TICKS;
 
     /**
      * Main thread loop. Used for UI/Events
@@ -45,9 +43,11 @@ void Game::loop()
 
         lastFrame = clock.getElapsedTime().asMilliseconds();
 
-        if(lastFrame >= (1000 / DELTA_TICKS))
+        if (lastFrame >= 1000) clock.restart();
+
+        while(lastFrame >= timeBetweenFixedUpdated)
         {
-            clock.restart();
+            lastFrame -= timeBetweenFixedUpdated;
             m_sceneManager.fixedUpdate(this);
         }
 

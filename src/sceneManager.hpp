@@ -3,7 +3,6 @@
 
 #include "scene/scene.hpp"
 #include "scene/exception/noSceneSetException.hpp"
-#include "loopable.hpp"
 
 #include <memory>
 
