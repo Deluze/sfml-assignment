@@ -22,15 +22,12 @@ void Scene::draw(sf::RenderWindow &window) const {
 }
 
 void Scene::onEnter(Game* game) {
-    std::cout << "Scene::onEnter \n";
 }
 
 void Scene::onLeave(Game* game) {
-    std::cout << "Scene::onEnter \n";
 }
 
 void Scene::onPause(Game* game) {
-    std::cout << "Scene::onPause \n";
 }
 
 void Scene::registerElement(UIElement *element) {
