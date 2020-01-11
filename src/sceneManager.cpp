@@ -1,11 +1,11 @@
 #include "sceneManager.hpp"
 
-void SceneManager::update() {
+void SceneManager::update(EventBag* events) {
     if(m_scene == nullptr) {
         throw NoSceneSetException();
     }
 
-    m_scene->update(m_game);
+    m_scene->update(m_game, events);
 }
 
 void SceneManager::draw(sf::RenderWindow& window) const {
@@ -16,12 +16,12 @@ void SceneManager::draw(sf::RenderWindow& window) const {
     m_scene->draw(window);
 }
 
-void SceneManager::fixedUpdate() {
+void SceneManager::fixedUpdate(EventBag* events) {
     if(m_scene == nullptr) {
         throw NoSceneSetException();
     }
 
-    m_scene->fixedUpdate(m_game);
+    m_scene->fixedUpdate(m_game, events);
 }
 
 void SceneManager::setGameContext(Game *game) {

@@ -2,6 +2,7 @@
 #define SFMLTEST_GAME_HPP
 
 #include "sceneManager.hpp"
+#include "eventManager.hpp"
 
 #include <string>
 
@@ -28,6 +29,7 @@ private:
     sf::RenderWindow m_window;
     std::string m_name;
     SceneManager m_sceneManager;
+    EventManager m_eventManager;
     bool m_running;
 };
 

@@ -3,6 +3,7 @@
 
 #include "scene/scene.hpp"
 #include "scene/exception/noSceneSetException.hpp"
+#include "eventBag.hpp"
 
 #include <memory>
 
@@ -24,8 +25,8 @@ public:
         m_scene->onEnter(m_game);
     }
 
-    void fixedUpdate();
-    void update();
+    void fixedUpdate(EventBag* events);
+    void update(EventBag* event);
     void draw(sf::RenderWindow& window) const;
     void setGameContext(Game* game);
 private:

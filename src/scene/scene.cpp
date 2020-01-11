@@ -4,10 +4,10 @@
 #include <SFML/Window/Mouse.hpp>
 #include <iostream>
 
-void Scene::fixedUpdate(Game* game) {
+void Scene::fixedUpdate(Game* game, EventBag* events) {
 }
 
-void Scene::update(Game *game)
+void Scene::update(Game *game, EventBag* events)
 {
     auto window = game->getWindow();
 

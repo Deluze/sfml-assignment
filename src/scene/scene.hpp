@@ -3,6 +3,7 @@
 
 #include "UIManager.hpp"
 #include "../gui/UIElement.hpp"
+#include "../eventBag.hpp"
 
 #include <functional>
 
@@ -14,6 +15,8 @@ class Game;
 
 class Scene
 {
+    using event = sf::Event;
+
 public:
     explicit Scene()
     {
@@ -21,10 +24,10 @@ public:
     }
 
     // This method is always called 60 times a second.
-    virtual void fixedUpdate(Game* game);
+    virtual void fixedUpdate(Game* game, EventBag* events);
 
     // This method should always be called, if inherited. Since this will listen to events and UI states.
-    virtual void update(Game* game);
+    virtual void update(Game* game, EventBag* events);
 
     // Callback for making drawings to the screen.
     virtual void draw(sf::RenderWindow& window) const;

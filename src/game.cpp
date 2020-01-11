@@ -41,6 +41,9 @@ void Game::loop()
     while(m_running)
     {
         m_window.clear();
+        m_eventManager.clear();
+
+        EventBag* eventBag = m_eventManager.checkForEvents(m_window);
 
         lastFrame = clock.getElapsedTime().asMilliseconds();
 
@@ -49,10 +52,10 @@ void Game::loop()
         while(lastFrame >= timeBetweenFixedUpdated)
         {
             lastFrame -= timeBetweenFixedUpdated;
-            m_sceneManager.fixedUpdate();
+            m_sceneManager.fixedUpdate(eventBag);
         }
 
-        m_sceneManager.update();
+        m_sceneManager.update(eventBag);
         m_sceneManager.draw(m_window);
 
         m_window.display();
