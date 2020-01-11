@@ -9,6 +9,7 @@ Game::Game(const char* name) : m_name(name), m_running(false)
 void Game::initialize()
 {
     m_window.create(sf::VideoMode(800, 800), m_name);
+    m_sceneManager.setGameContext(this);
 }
 
 void Game::start()
@@ -48,10 +49,10 @@ void Game::loop()
         while(lastFrame >= timeBetweenFixedUpdated)
         {
             lastFrame -= timeBetweenFixedUpdated;
-            m_sceneManager.fixedUpdate(this);
+            m_sceneManager.fixedUpdate();
         }
 
-        m_sceneManager.update(this);
+        m_sceneManager.update();
         m_sceneManager.draw(m_window);
 
         m_window.display();

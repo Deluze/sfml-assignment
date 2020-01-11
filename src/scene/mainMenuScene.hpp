@@ -2,7 +2,6 @@
 #define SFMLTEST_MAINMENUSCENE_HPP
 
 #include "scene.hpp"
-#include "../game.hpp"
 #include "../gui/button.hpp"
 
 #include <functional>
@@ -15,6 +14,8 @@ public:
     MainMenuScene();
 
     void draw(sf::RenderWindow &window) const override;
+    void onEnter(Game *game) override;
+
 private:
 
     sf::Text m_playButtonText;
@@ -23,8 +24,8 @@ private:
     sf::Text m_quitButtonText;
     Button m_quitButton;
 
-    void onPlay();
-    void onQuit();
+    void onPlay(Game* game);
+    void onQuit(Game* game);
 };
 
 

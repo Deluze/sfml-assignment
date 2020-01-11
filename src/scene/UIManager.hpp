@@ -14,6 +14,7 @@ public:
     void registerElement(UIElement* element);
 
     void resolveClick(sf::Vector2i position);
+    void clear();
 private:
     std::vector<UIElement*> m_elements;
 };

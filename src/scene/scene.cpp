@@ -7,11 +7,9 @@
 void Scene::fixedUpdate(Game* game) {
 }
 
-void Scene::update(Game *game) {
-
+void Scene::update(Game *game)
+{
     auto window = game->getWindow();
-
-//    m_eventManager.checkForEvents(*window);
 
     if(sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && window->isOpen())
     {
@@ -23,16 +21,16 @@ void Scene::draw(sf::RenderWindow &window) const {
 
 }
 
-void Scene::onEnter() {
-
+void Scene::onEnter(Game* game) {
+    std::cout << "Scene::onEnter \n";
 }
 
-void Scene::onLeave() {
-
+void Scene::onLeave(Game* game) {
+    std::cout << "Scene::onEnter \n";
 }
 
-void Scene::onPause() {
-
+void Scene::onPause(Game* game) {
+    std::cout << "Scene::onPause \n";
 }
 
 void Scene::registerElement(UIElement *element) {

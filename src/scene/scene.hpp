@@ -2,7 +2,6 @@
 #define SFMLTEST_SCENE_HPP
 
 #include "UIManager.hpp"
-#include "../eventManager.hpp"
 #include "../gui/UIElement.hpp"
 
 #include <functional>
@@ -31,13 +30,13 @@ public:
     virtual void draw(sf::RenderWindow& window) const;
 
     // Callback before an actual update or draw loop will happen.
-    virtual void onEnter();
+    virtual void onEnter(Game* game);
 
     // Callback just before this scene will get destroyed by the manager.
-    virtual void onLeave();
+    virtual void onLeave(Game* game);
 
     // Callback whenever the window loses focus or user presses a button.
-    virtual void onPause();
+    virtual void onPause(Game* game);
 
     // This is just a fancy, totally unnecessary ctor
     // But it is used to make instantiating UI elements look standard.
@@ -52,7 +51,6 @@ public:
 
 private:
     UIManager m_uiManager;
-    EventManager m_eventManager;
 protected:
     sf::Font m_font;
 };
