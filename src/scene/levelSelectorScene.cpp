@@ -59,7 +59,6 @@ std::string LevelSelectorScene::getLevelName() {
 }
 
 void LevelSelectorScene::onGUI(Engine *engine) {
-    m_backButtonText = createElement<sf::Text>();
     m_backButtonText.setString("Back");
     m_backButtonText.setFont(m_font);
     m_backButtonText.setCharacterSize(15);
@@ -70,7 +69,6 @@ void LevelSelectorScene::onGUI(Engine *engine) {
     m_backButton.bindClick([this, engine]() {onBack(engine);});
     registerElement(&m_backButton);
 
-    m_prevLevelText = createElement<sf::Text>();
     m_prevLevelText.setFont(m_font);
     m_prevLevelText.setCharacterSize(20);
     m_prevLevelText.setString("Prev level");
@@ -84,7 +82,6 @@ void LevelSelectorScene::onGUI(Engine *engine) {
     registerElement(&m_prevLevelButton);
 
 
-    m_nextLevelText = createElement<sf::Text>();
     m_nextLevelText.setFont(m_font);
     m_nextLevelText.setCharacterSize(20);
     m_nextLevelText.setString("Next level");
@@ -97,14 +94,12 @@ void LevelSelectorScene::onGUI(Engine *engine) {
     });
     registerElement(&m_nextLevelButton);
 
-    m_currentSelectedLevelText = createElement<sf::Text>();
     m_currentSelectedLevelText.setFont(m_font);
     m_currentSelectedLevelText.setCharacterSize(50);
     // For now the level text will always be on the same position.
     m_currentSelectedLevelText.setString(getLevelName());
     m_currentSelectedLevelText.setPosition(300, 300);
 
-    m_playButtonText = createElement<sf::Text>();
     m_playButtonText.setFont(m_font);
     m_playButtonText.setString("Play!");
 

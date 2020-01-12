@@ -28,7 +28,6 @@ void MainMenuScene::onQuit(Engine* engine) {
 }
 
 void MainMenuScene::onGUI(Engine *engine) {
-    m_playButtonText = createElement<sf::Text>();
     m_playButtonText.setFont(m_font);
     m_playButtonText.setString("Play!");
 
@@ -39,7 +38,6 @@ void MainMenuScene::onGUI(Engine *engine) {
 
     registerElement(&m_playButton);
 
-    m_quitButtonText = createElement<sf::Text>();
     m_quitButtonText.setFont(m_font);
     m_quitButtonText.setString("Quit");
     m_quitButtonText.setCharacterSize(15);

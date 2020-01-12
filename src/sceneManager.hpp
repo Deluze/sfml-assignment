@@ -29,7 +29,7 @@ public:
     void fixedUpdate(EventBag* events);
     void update(EventBag* event);
     void draw(sf::RenderWindow& window) const;
-    void setGameContext(Engine* game);
+    void setEngineContext(Engine* game);
 private:
     std::unique_ptr<Scene> m_scene;
     Engine* m_game;

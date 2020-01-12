@@ -9,7 +9,7 @@ Engine::Engine(const char* name) : m_name(name), m_running(false)
 void Engine::initialize()
 {
     m_window.create(sf::VideoMode(800, 800), m_name);
-    m_sceneManager.setGameContext(this);
+    m_sceneManager.setEngineContext(this);
 }
 
 void Engine::start()
