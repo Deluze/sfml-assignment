@@ -13,8 +13,8 @@ class MainMenuScene : public Scene {
 public:
     MainMenuScene();
 
+    void onGUI(Game *game) override;
     void draw(sf::RenderWindow &window) const override;
-    void onEnter(Game *game) override;
 
 private:
 

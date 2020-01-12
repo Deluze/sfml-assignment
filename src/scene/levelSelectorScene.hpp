@@ -11,14 +11,17 @@ class LevelSelectorScene : public Scene {
 public:
     LevelSelectorScene();
     void onEnter(Game *game) override;
+    void onGUI(Game *game) override;
     void draw(sf::RenderWindow &window) const override;
 private:
-    void loadLevel(Game* game, const char* levelName);
+    void onPlay(Game* game);
     void onBack(Game* game);
     void parseLevels();
     void swapLevel(sf::Uint32 level);
     bool hasNextLevel();
     bool hasPrevLevel();
+    std::string getLevelName();
+    void updateBindings();
 
     sf::Text m_backButtonText;
     Button m_backButton;
@@ -28,6 +31,11 @@ private:
 
     sf::Text m_nextLevelText;
     Button m_nextLevelButton;
+
+    sf::Text m_currentSelectedLevelText;
+
+    sf::Text m_playButtonText;
+    Button m_playButton;
 
     std::vector<std::string> m_levels;
     sf::Uint32 m_currentSelectedLevel;

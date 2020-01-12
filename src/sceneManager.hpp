@@ -22,6 +22,7 @@ public:
 
         m_scene.reset();
         m_scene = std::make_unique<SceneClass>(args...);
+        m_scene->onGUI(m_game);
         m_scene->onEnter(m_game);
     }
 

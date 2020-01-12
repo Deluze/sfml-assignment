@@ -37,3 +37,7 @@ void Scene::onPause(Game* game) {
 void Scene::registerElement(UIElement *element) {
     m_uiManager.registerElement(element);
 }
+
+void Scene::onGUI(Game *game) {
+
+}

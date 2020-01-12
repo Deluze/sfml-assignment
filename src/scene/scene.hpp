@@ -15,8 +15,6 @@ class Game;
 
 class Scene
 {
-    using event = sf::Event;
-
 public:
     explicit Scene()
     {
@@ -41,6 +39,9 @@ public:
     // Callback whenever the window loses focus or user presses a button.
     virtual void onPause(Game* game);
 
+    // Callback used for setting up the UI, gets called before `onEnter`
+    virtual void onGUI(Game* game);
+
     // This is just a fancy, totally unnecessary ctor
     // But it is used to make instantiating UI elements look standard.
     template<class T, class ...Args>
@@ -49,10 +50,12 @@ public:
         return T(args...);
     }
 
-    // Registers
+    // Registers the element to the UI manager. So it can handle basic click events.
     void registerElement(UIElement* element);
-
 private:
+    using event = sf::Event;
+    using eventType = event::EventType;
+
     UIManager m_uiManager;
 protected:
     sf::Font m_font;

@@ -27,7 +27,7 @@ void MainMenuScene::onQuit(Game* game) {
     game->getWindow()->close();
 }
 
-void MainMenuScene::onEnter(Game *game) {
+void MainMenuScene::onGUI(Game *game) {
     m_playButtonText = createElement<sf::Text>();
     m_playButtonText.setFont(m_font);
     m_playButtonText.setString("Play!");
