@@ -9,7 +9,7 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 
-class Game;
+class Engine;
 
 class SceneManager {
 public:
@@ -29,10 +29,10 @@ public:
     void fixedUpdate(EventBag* events);
     void update(EventBag* event);
     void draw(sf::RenderWindow& window) const;
-    void setGameContext(Game* game);
+    void setGameContext(Engine* game);
 private:
     std::unique_ptr<Scene> m_scene;
-    Game* m_game;
+    Engine* m_game;
 };
 
 #endif //SFMLTEST_SCENEMANAGER_HPP

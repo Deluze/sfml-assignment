@@ -1,13 +1,13 @@
-#include "game.hpp"
+#include "engine.hpp"
 
 #include <SFML/Graphics/CircleShape.hpp>
 
 int main()
 {
-    Game* game = new Game("My Game :)");
+    auto engine = new Engine("My Engine :)");
 
-    game->initialize();
-    game->start();
+    engine->initialize();
+    engine->start();
 
     return 0;
 }

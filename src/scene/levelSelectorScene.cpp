@@ -1,6 +1,7 @@
 #include "levelSelectorScene.hpp"
-#include "../game.hpp"
+#include "../engine.hpp"
 #include "mainMenuScene.hpp"
+#include "gameScene.hpp"
 
 #include <filesystem>
 
@@ -15,8 +16,8 @@ void LevelSelectorScene::draw(sf::RenderWindow &window) const {
     window.draw(m_playButton);
 }
 
-void LevelSelectorScene::onBack(Game *game) {
-    auto sceneManager = game->getSceneManager();
+void LevelSelectorScene::onBack(Engine *engine) {
+    auto sceneManager = engine->getSceneManager();
     sceneManager->setScene<MainMenuScene>();
 }
 
@@ -57,7 +58,7 @@ std::string LevelSelectorScene::getLevelName() {
     return "No Levels Available!";
 }
 
-void LevelSelectorScene::onGUI(Game *game) {
+void LevelSelectorScene::onGUI(Engine *engine) {
     m_backButtonText = createElement<sf::Text>();
     m_backButtonText.setString("Back");
     m_backButtonText.setFont(m_font);
@@ -66,7 +67,7 @@ void LevelSelectorScene::onGUI(Game *game) {
     m_backButton = createElement<Button>(m_backButtonText);
     m_backButton.setBackgroundColor(sf::Color{122, 20, 37});
     m_backButton.setPosition(0, 20);
-    m_backButton.bindClick([this, game]() {onBack(game);});
+    m_backButton.bindClick([this, engine]() {onBack(engine);});
     registerElement(&m_backButton);
 
     m_prevLevelText = createElement<sf::Text>();
@@ -110,17 +111,18 @@ void LevelSelectorScene::onGUI(Game *game) {
     m_playButton = createElement<Button>(m_playButtonText, 210, 60);
     m_playButton.setPosition(300, 480);
     m_playButton.setBackgroundColor(sf::Color{65, 161, 18});
-    m_playButton.bindClick([this, game]() {onPlay(game); });
+    m_playButton.bindClick([this, engine]() {onPlay(engine); });
+    registerElement(&m_playButton);
 }
 
-void LevelSelectorScene::onEnter(Game *game) {
+void LevelSelectorScene::onEnter(Engine *engine) {
     parseLevels();
 
     updateBindings();
 }
 
-void LevelSelectorScene::onPlay(Game *game) {
-
+void LevelSelectorScene::onPlay(Engine *engine) {
+    engine->getSceneManager()->setScene<GameScene>(getLevelName());
 }
 
 void LevelSelectorScene::updateBindings() {

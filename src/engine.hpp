@@ -1,5 +1,5 @@
-#ifndef SFMLTEST_GAME_HPP
-#define SFMLTEST_GAME_HPP
+#ifndef SFMLTEST_ENGINE_HPP
+#define SFMLTEST_ENGINE_HPP
 
 #include "sceneManager.hpp"
 #include "eventManager.hpp"
@@ -10,10 +10,10 @@
 
 #define DELTA_TICKS 60
 
-class Game {
+class Engine {
 public:
-    explicit Game(const char* name);
-    ~Game() = default;
+    explicit Engine(const char* name);
+    ~Engine() = default;
 
     void initialize();
     void start();
@@ -21,7 +21,6 @@ public:
 
     sf::RenderWindow* getWindow();
     SceneManager* getSceneManager();
-
 private:
 
     void loop();
@@ -33,4 +32,4 @@ private:
     bool m_running;
 };
 
-#endif //SFMLTEST_GAME_HPP
+#endif //SFMLTEST_ENGINE_HPP

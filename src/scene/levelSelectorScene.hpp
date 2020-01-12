@@ -3,19 +3,18 @@
 
 #include "scene.hpp"
 #include "../gui/button.hpp"
-#include "../game/level.hpp"
 
 #include <vector>
 
 class LevelSelectorScene : public Scene {
 public:
     LevelSelectorScene();
-    void onEnter(Game *game) override;
-    void onGUI(Game *game) override;
+    void onEnter(Engine *engine) override;
+    void onGUI(Engine *engine) override;
     void draw(sf::RenderWindow &window) const override;
 private:
-    void onPlay(Game* game);
-    void onBack(Game* game);
+    void onPlay(Engine* engine);
+    void onBack(Engine* engine);
     void parseLevels();
     void swapLevel(sf::Uint32 level);
     bool hasNextLevel();

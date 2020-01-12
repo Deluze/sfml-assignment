@@ -13,7 +13,7 @@ class MainMenuScene : public Scene {
 public:
     MainMenuScene();
 
-    void onGUI(Game *game) override;
+    void onGUI(Engine *engine) override;
     void draw(sf::RenderWindow &window) const override;
 
 private:
@@ -24,8 +24,8 @@ private:
     sf::Text m_quitButtonText;
     Button m_quitButton;
 
-    void onPlay(Game* game);
-    void onQuit(Game* game);
+    void onPlay(Engine* engine);
+    void onQuit(Engine* engine);
 };
 
 

@@ -1,18 +1,18 @@
-#include "game.hpp"
+#include "engine.hpp"
 #include "scene/mainMenuScene.hpp"
 
-Game::Game(const char* name) : m_name(name), m_running(false)
+Engine::Engine(const char* name) : m_name(name), m_running(false)
 {
 
 }
 
-void Game::initialize()
+void Engine::initialize()
 {
     m_window.create(sf::VideoMode(800, 800), m_name);
     m_sceneManager.setGameContext(this);
 }
 
-void Game::start()
+void Engine::start()
 {
     // default scene
     m_sceneManager.setScene<MainMenuScene>();
@@ -23,12 +23,12 @@ void Game::start()
 }
 
 
-void Game::stop()
+void Engine::stop()
 {
     m_running = false;
 }
 
-void Game::loop()
+void Engine::loop()
 {
     sf::Clock clock;
     sf::Uint32 lastFrame;
@@ -62,10 +62,10 @@ void Game::loop()
 
 }
 
-sf::RenderWindow *Game::getWindow() {
+sf::RenderWindow *Engine::getWindow() {
     return &m_window;
 }
 
-SceneManager *Game::getSceneManager() {
+SceneManager *Engine::getSceneManager() {
     return &m_sceneManager;
 }

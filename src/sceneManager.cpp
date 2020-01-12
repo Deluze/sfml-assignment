@@ -24,6 +24,6 @@ void SceneManager::fixedUpdate(EventBag* events) {
     m_scene->fixedUpdate(m_game, events);
 }
 
-void SceneManager::setGameContext(Game *game) {
+void SceneManager::setGameContext(Engine *game) {
     m_game = game;
 }

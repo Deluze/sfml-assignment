@@ -1,6 +1,6 @@
 #include "mainMenuScene.hpp"
 
-#include "../game.hpp"
+#include "../engine.hpp"
 #include "levelSelectorScene.hpp"
 
 MainMenuScene::MainMenuScene() : Scene()
@@ -14,20 +14,20 @@ void MainMenuScene::draw(sf::RenderWindow &window) const
     window.draw(m_quitButton);
 }
 
-void MainMenuScene::onPlay(Game* game) {
+void MainMenuScene::onPlay(Engine* engine) {
     m_playButton.setDisabled(true);
 
-    const auto sceneManager = game->getSceneManager();
+    const auto sceneManager = engine->getSceneManager();
     sceneManager->setScene<LevelSelectorScene>();
 }
 
-void MainMenuScene::onQuit(Game* game) {
+void MainMenuScene::onQuit(Engine* engine) {
     m_quitButton.setDisabled(true);
 
-    game->getWindow()->close();
+    engine->getWindow()->close();
 }
 
-void MainMenuScene::onGUI(Game *game) {
+void MainMenuScene::onGUI(Engine *engine) {
     m_playButtonText = createElement<sf::Text>();
     m_playButtonText.setFont(m_font);
     m_playButtonText.setString("Play!");
@@ -35,7 +35,7 @@ void MainMenuScene::onGUI(Game *game) {
     m_playButton = createElement<Button>(m_playButtonText, 200, 50);
     m_playButton.setBackgroundColor(sf::Color{214, 47, 75});
     m_playButton.setPosition(0, 100);
-    m_playButton.bindClick([this, game]() {onPlay(game);});
+    m_playButton.bindClick([this, engine]() {onPlay(engine);});
 
     registerElement(&m_playButton);
 
@@ -47,7 +47,7 @@ void MainMenuScene::onGUI(Game *game) {
     m_quitButton = createElement<Button>(m_quitButtonText, 150, 20);
     m_quitButton.setBackgroundColor(sf::Color{122, 20, 37});
     m_quitButton.setPosition(0, 175);
-    m_quitButton.bindClick([this, game]() {onQuit(game);});
+    m_quitButton.bindClick([this, engine]() {onQuit(engine);});
 
     registerElement(&m_quitButton);
 }

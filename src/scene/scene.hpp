@@ -11,7 +11,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Transformable.hpp>
 
-class Game;
+class Engine;
 
 class Scene
 {
@@ -22,25 +22,25 @@ public:
     }
 
     // This method is always called 60 times a second.
-    virtual void fixedUpdate(Game* game, EventBag* events);
+    virtual void fixedUpdate(Engine* engine, EventBag* events);
 
     // This method should always be called, if inherited. Since this will listen to events and UI states.
-    virtual void update(Game* game, EventBag* events);
+    virtual void update(Engine* engine, EventBag* events);
 
     // Callback for making drawings to the screen.
     virtual void draw(sf::RenderWindow& window) const;
 
     // Callback before an actual update or draw loop will happen.
-    virtual void onEnter(Game* game);
+    virtual void onEnter(Engine* engine);
 
     // Callback just before this scene will get destroyed by the manager.
-    virtual void onLeave(Game* game);
+    virtual void onLeave(Engine* engine);
 
     // Callback whenever the window loses focus or user presses a button.
-    virtual void onPause(Game* game);
+    virtual void onPause(Engine* engine);
 
     // Callback used for setting up the UI, gets called before `onEnter`
-    virtual void onGUI(Game* game);
+    virtual void onGUI(Engine* engine);
 
     // This is just a fancy, totally unnecessary ctor
     // But it is used to make instantiating UI elements look standard.

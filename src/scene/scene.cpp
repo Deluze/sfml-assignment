@@ -1,15 +1,13 @@
 #include "scene.hpp"
-#include "../game.hpp"
+#include "../engine.hpp"
 
 #include <SFML/Window/Mouse.hpp>
 
-void Scene::fixedUpdate(Game* game, EventBag* events) {
+void Scene::fixedUpdate(Engine* engine, EventBag* events) {
 }
 
-void Scene::update(Game *game, EventBag* events)
+void Scene::update(Engine *engine, EventBag* events)
 {
-    auto window = game->getWindow();
-
     auto event = events->get(sf::Event::EventType::MouseButtonReleased);
 
     if(event == nullptr) return;
@@ -25,19 +23,19 @@ void Scene::draw(sf::RenderWindow &window) const {
 
 }
 
-void Scene::onEnter(Game* game) {
+void Scene::onEnter(Engine* engine) {
 }
 
-void Scene::onLeave(Game* game) {
+void Scene::onLeave(Engine* engine) {
 }
 
-void Scene::onPause(Game* game) {
+void Scene::onPause(Engine* engine) {
 }
 
 void Scene::registerElement(UIElement *element) {
     m_uiManager.registerElement(element);
 }
 
-void Scene::onGUI(Game *game) {
+void Scene::onGUI(Engine *engine) {
 
 }
