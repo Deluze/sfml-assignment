@@ -12,6 +12,7 @@ void UIManager::resolveClick(sf::Vector2i position) {
     // e.g. if there's an overlay. you would still be clicking on
     // elements underneath the overlay, we don't want that.
     for (auto it = m_elements.rbegin(); it != m_elements.rend() ; it++) {
+
         const auto element = *it;
 
         // Since these are not shapes, we have to implement our own 'contains' method.

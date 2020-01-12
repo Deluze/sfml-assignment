@@ -8,11 +8,13 @@ Button::Button(sf::Text text, float width, float height) : UIElement({width, hei
         width, height
     });
 
-    m_text.setPosition((width - m_text.getGlobalBounds().width) / 2, (height - m_text.getGlobalBounds().height) / 2 - 3);
+    m_text.setPosition((width - m_text.getGlobalBounds().width) / 2, (height - m_text.getGlobalBounds().height) / 2 - 5);
 }
 
 void Button::setDisabled(const bool &disabled) {
     m_disabled = disabled;
+
+    m_rectangle.setFillColor(m_disabled ? sf::Color{122, 122, 122} : m_originalColor);
 }
 
 bool Button::isDisabled() {
@@ -48,6 +50,7 @@ void Button::setText(const char *text) {
 
 void Button::setBackgroundColor(const sf::Color &color) {
     m_rectangle.setFillColor(color);
+    m_originalColor = color;
 }
 
 void Button::setTextColor(const sf::Color &color) {
@@ -57,3 +60,12 @@ void Button::setTextColor(const sf::Color &color) {
 void Button::setCharacterSize(const sf::Uint32& size) {
     m_text.setCharacterSize(size);
 }
+
+void Button::setHeight(float height) {
+    UIElement::setHeight(height);
+}
+
+void Button::setWidth(float height) {
+    UIElement::setWidth(height);
+}
+

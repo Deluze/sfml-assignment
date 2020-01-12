@@ -1,6 +1,7 @@
 #include "mainMenuScene.hpp"
 
 #include "../game.hpp"
+#include "levelSelectorScene.hpp"
 
 MainMenuScene::MainMenuScene() : Scene()
 {
@@ -17,7 +18,7 @@ void MainMenuScene::onPlay(Game* game) {
     m_playButton.setDisabled(true);
 
     const auto sceneManager = game->getSceneManager();
-    sceneManager->setScene<MainMenuScene>();
+    sceneManager->setScene<LevelSelectorScene>();
 }
 
 void MainMenuScene::onQuit(Game* game) {

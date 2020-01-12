@@ -28,8 +28,10 @@ public:
     float getWidth();
     float getHeight();
 
-    void setWidth(float width);
-    void setHeight(float height);
+    virtual void setWidth(float width);
+    virtual void setHeight(float height);
+
+    virtual void update();
 
 private:
     UIElement::ClickHandler m_clickHandler;

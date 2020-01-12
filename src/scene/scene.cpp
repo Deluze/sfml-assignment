@@ -2,7 +2,6 @@
 #include "../game.hpp"
 
 #include <SFML/Window/Mouse.hpp>
-#include <iostream>
 
 void Scene::fixedUpdate(Game* game, EventBag* events) {
 }
@@ -11,10 +10,15 @@ void Scene::update(Game *game, EventBag* events)
 {
     auto window = game->getWindow();
 
-    if(sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && window->isOpen())
-    {
-        m_uiManager.resolveClick(sf::Mouse::getPosition(*window));
-    }
+    auto event = events->get(sf::Event::EventType::MouseButtonReleased);
+
+    if(event == nullptr) return;
+    if(event->mouseButton.button != sf::Mouse::Button::Left) return;
+
+    m_uiManager.resolveClick({
+        event->mouseButton.x,
+        event->mouseButton.y
+    });
 }
 
 void Scene::draw(sf::RenderWindow &window) const {

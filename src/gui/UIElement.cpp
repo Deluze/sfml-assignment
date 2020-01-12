@@ -18,11 +18,15 @@ void UIElement::bindHover(const UIElement::HoverHandler &handler)
 
 void UIElement::onClick()
 {
+    if(!m_clickHandler) return;
+
     m_clickHandler();
 }
 
 void UIElement::onHover()
 {
+    if(m_hoverHandler) return;
+
     m_hoverHandler();
 }
 
@@ -44,4 +48,8 @@ void UIElement::setWidth(float width)
 void UIElement::setHeight(float height)
 {
     m_vector.y = height;
+}
+
+void UIElement::update() {
+
 }

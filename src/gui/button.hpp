@@ -30,8 +30,10 @@ public:
 
     void onClick() override;
     void onHover() override;
-
 private:
+
+    void setHeight(float height) override;
+    void setWidth(float height) override;
     // If true, this UIElement does not fire events.
     bool m_disabled = false;
 
@@ -40,6 +42,8 @@ private:
 
     // How to do this otherwise? We need to attach children to our button, but inheriting from shapes directly makes draw method inaccessible
     sf::RectangleShape m_rectangle;
+
+    sf::Color m_originalColor;
 };
 
 #endif //SFMLTEST_BUTTON_HPP

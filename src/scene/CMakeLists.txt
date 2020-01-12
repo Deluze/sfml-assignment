@@ -7,5 +7,7 @@ target_sources(SFMLTest PRIVATE
         ${PATH}/mainMenuScene.hpp
         ${PATH}/UIManager.hpp
         ${PATH}/UIManager.cpp
+        ${PATH}/levelSelectorScene.hpp
+        ${PATH}/levelSelectorScene.cpp
 )
 add_subdirectory(exception)

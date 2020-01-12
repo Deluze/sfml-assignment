@@ -13,3 +13,4 @@ target_sources(SFMLTest PRIVATE
 
 add_subdirectory(gui)
 add_subdirectory(scene)
+add_subdirectory(game)

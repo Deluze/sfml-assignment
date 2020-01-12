@@ -30,7 +30,6 @@ void Game::stop()
 
 void Game::loop()
 {
-
     sf::Clock clock;
     sf::Uint32 lastFrame;
     constexpr sf::Uint32 timeBetweenFixedUpdated = 1000 / DELTA_TICKS;
