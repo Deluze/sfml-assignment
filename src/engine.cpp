@@ -46,8 +46,6 @@ void Engine::loop()
 
         lastFrame = clock.getElapsedTime().asMilliseconds();
 
-        if (lastFrame >= 1000) clock.restart();
-
         while(lastFrame >= timeBetweenFixedUpdated)
         {
             lastFrame -= timeBetweenFixedUpdated;
@@ -59,7 +57,6 @@ void Engine::loop()
 
         m_window.display();
     }
-
 }
 
 sf::RenderWindow *Engine::getWindow() {

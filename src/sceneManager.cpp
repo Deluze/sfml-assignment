@@ -5,7 +5,7 @@ void SceneManager::update(EventBag* events) {
         throw NoSceneSetException();
     }
 
-    m_scene->update(m_game, events);
+    m_scene->update(m_engine, events);
 }
 
 void SceneManager::draw(sf::RenderWindow& window) const {
@@ -21,9 +21,9 @@ void SceneManager::fixedUpdate(EventBag* events) {
         throw NoSceneSetException();
     }
 
-    m_scene->fixedUpdate(m_game, events);
+    m_scene->fixedUpdate(m_engine, events);
 }
 
 void SceneManager::setEngineContext(Engine *game) {
-    m_game = game;
+    m_engine = game;
 }

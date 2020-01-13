@@ -4,7 +4,6 @@
 #include "scene/scene.hpp"
 #include "scene/exception/noSceneSetException.hpp"
 #include "eventBag.hpp"
-
 #include <memory>
 
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -17,13 +16,13 @@ public:
     void setScene(Args... args)
     {
        if(m_scene != nullptr) {
-           m_scene->onLeave(m_game);
+           m_scene->onLeave(m_engine);
        }
 
         m_scene.reset();
         m_scene = std::make_unique<SceneClass>(args...);
-        m_scene->onGUI(m_game);
-        m_scene->onEnter(m_game);
+        m_scene->onGUI(m_engine);
+        m_scene->onEnter(m_engine);
     }
 
     void fixedUpdate(EventBag* events);
@@ -32,7 +31,7 @@ public:
     void setEngineContext(Engine* game);
 private:
     std::unique_ptr<Scene> m_scene;
-    Engine* m_game;
+    Engine* m_engine;
 };
 
 #endif //SFMLTEST_SCENEMANAGER_HPP

@@ -17,3 +17,11 @@ sf::Event *EventBag::get(sf::Event::EventType eventType) {
 void EventBag::clear() {
     m_events.clear();
 }
+
+sf::Event *EventBag::take(sf::Event::EventType eventType) {
+    auto event = get(eventType);
+
+    m_events.erase(eventType);
+
+    return event;
+}

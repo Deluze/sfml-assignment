@@ -12,4 +12,5 @@ target_sources(SFMLTest PRIVATE
         ${PATH}/gameScene.cpp
         ${PATH}/gameScene.hpp
 )
+
 add_subdirectory(exception)

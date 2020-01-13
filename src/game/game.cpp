@@ -1,6 +1,6 @@
 #include "game.hpp"
 
-Game::Game() : m_health(100) {}
+Game::Game() : m_health(100), m_gold(1000) {}
 
 void Game::addGold(sf::Uint32 amount) {
     m_gold += amount;
@@ -43,4 +43,8 @@ sf::Uint32 Game::getHealth() {
 
 void Game::setHealth(sf::Uint32 health) {
     m_health = health;
+}
+
+sf::Uint32 Game::getWave() {
+    return 0;
 }

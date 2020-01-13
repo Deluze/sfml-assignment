@@ -7,6 +7,9 @@ void UIManager::registerElement(UIElement* element) {
 }
 
 void UIManager::resolveClick(sf::Vector2i position) {
+
+    if (position.x == 0 && position.y == 0) return; // We have to do this, window::isOpen does not work?
+
     // we use a reverse iterator here, because it could be that at some point
     // ui elements need to be rendered on top of each other
     // e.g. if there's an overlay. you would still be clicking on

@@ -81,7 +81,6 @@ void LevelSelectorScene::onGUI(Engine *engine) {
     });
     registerElement(&m_prevLevelButton);
 
-
     m_nextLevelText.setFont(m_font);
     m_nextLevelText.setCharacterSize(20);
     m_nextLevelText.setString("Next level");

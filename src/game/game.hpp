@@ -17,6 +17,8 @@ public:
     void setHealth(sf::Uint32 health);
     sf::Uint32 getHealth();
 
+    sf::Uint32 getWave();
+
 private:
     sf::Uint32 m_health;
     sf::Uint32 m_gold;
