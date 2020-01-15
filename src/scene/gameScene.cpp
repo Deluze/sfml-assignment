@@ -17,6 +17,7 @@ void GameScene::update(Engine *engine, EventBag *events) {
             if (tile != nullptr)
             {
                 events->take(sf::Event::EventType::MouseButtonReleased); // we found a tile, no need to look for any other GUI clicks.
+                m_game->handleTileClick(tile);
             }
         }
     }
@@ -93,5 +94,5 @@ void GameScene::draw(sf::RenderWindow &window) const {
     window.draw(m_healthSprite);
     window.draw(m_goldSprite);
     window.draw(m_exitButton);
-    window.draw(*m_game->getGrid());
+    window.draw(*m_game);
 }

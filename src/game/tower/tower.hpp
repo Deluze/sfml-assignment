@@ -3,9 +3,13 @@
 
 #include "../gameObject.hpp"
 
+#include <memory>
 
 class Tower : public GameObject {
 public:
+
+    using Ptr = std::shared_ptr<Tower>;
+
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
     sf::Uint8 getRange();
     sf::Uint32 getDamage();

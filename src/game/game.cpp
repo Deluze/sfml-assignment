@@ -4,6 +4,19 @@ Game::Game() : m_health(100), m_gold(1000) {
     m_grid.initialize();
 }
 
+void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+    // bottom layer (tiles)
+    target.draw(m_grid, states);
+
+    // enemy layer
+
+    // tower layer
+    for(const Tower::Ptr& tower : m_towers)
+    {
+        target.draw(*tower, states);
+    }
+}
+
 void Game::addGold(sf::Uint32 amount) {
     m_gold += amount;
 }
@@ -53,4 +66,28 @@ sf::Uint32 Game::getWave() {
 
 Grid *Game::getGrid() {
     return &m_grid;
+}
+
+void Game::handleTileClick(Tile *tile) {
+    m_currentSelectedTile = tile;
+
+    if(tile->hasTower()) return; // TODO: Open window with tower upgrades?
+
+    if(hasTowerSelected()) {
+        auto tower = getSelectedTower();
+        m_towers.push_back(tower);
+        tile->setTower(tower);
+    }
+}
+
+bool Game::hasTowerSelected() {
+    return m_currentSelectedTower != nullptr;
+}
+
+Tower::Ptr Game::getSelectedTower() {
+    return m_currentSelectedTower;
+}
+
+Tile *Game::getSelectedTile() {
+    return m_currentSelectedTile;
 }
