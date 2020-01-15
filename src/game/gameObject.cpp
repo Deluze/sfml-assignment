@@ -2,6 +2,10 @@
 
 #include <SFML/Graphics/Rect.hpp>
 
+GameObject::GameObject() {
+
+}
+
 void GameObject::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 
 }

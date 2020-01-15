@@ -1,11 +1,18 @@
 #include "tile.hpp"
 
+#include <utility>
+
+
+Tile::Tile(TileType tileType) : m_type(tileType) {
+
+}
+
 TileType Tile::getType() {
     return m_type;
 }
 
 bool Tile::isBuildable() {
-    return m_type != TileType::Pathway;
+    return m_type != TileType::Sand;
 }
 
 bool Tile::hasTower() {
@@ -13,9 +20,9 @@ bool Tile::hasTower() {
 }
 
 void Tile::setTower(std::weak_ptr<Tower> tower) {
-    m_tower = tower;
+    m_tower = std::move(tower);
 }
 
-void Tile::draw(sf::RenderTarget &target, sf::RenderStates states) const {
-
+void Tile::setTileType(TileType tileType) {
+    m_type = tileType;
 }

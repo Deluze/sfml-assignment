@@ -16,6 +16,7 @@ class GameScene : public Scene {
 public:
     explicit GameScene(std::string levelName);
 
+    void update(Engine *engine, EventBag *events) override;
     void onEnter(Engine *engine) override;
     void onGUI(Engine *engine) override;
     void draw(sf::RenderWindow &window) const override;
@@ -27,6 +28,9 @@ private:
     sf::Text m_goldText;
     sf::Text m_exitText;
     sf::Text m_levelText;
+
+    sf::Sprite m_groundSprite;
+    sf::Texture m_groundTexture;
 
     sf::Sprite m_goldSprite;
     sf::Texture m_goldTexture;

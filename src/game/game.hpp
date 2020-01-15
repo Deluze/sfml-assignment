@@ -1,7 +1,10 @@
 #ifndef SFMLTEST_GAME_HPP
 #define SFMLTEST_GAME_HPP
 
+#include "grid.hpp"
+
 #include <SFML/Config.hpp>
+#include <SFML/System/NonCopyable.hpp>
 
 class Game {
 public:
@@ -19,9 +22,13 @@ public:
 
     sf::Uint32 getWave();
 
+    Grid* getGrid();
 private:
+
     sf::Uint32 m_health;
     sf::Uint32 m_gold;
+
+    Grid m_grid;
 };
 
 

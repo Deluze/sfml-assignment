@@ -4,12 +4,27 @@
 #include <utility>
 #include <sstream>
 
-GameScene::GameScene(std::string levelName) : Scene(), m_levelName(std::move(levelName)) {
+GameScene::GameScene(std::string levelName) : Scene(), m_levelName(std::move(levelName)), m_game(std::make_unique<Game>()) {
 
 }
 
+void GameScene::update(Engine *engine, EventBag *events) {
+
+    if(events->has(sf::Event::EventType::MouseButtonReleased)) {
+        auto event = events->get(sf::Event::EventType::MouseButtonReleased);
+        if(event->mouseButton.button == sf::Mouse::Button::Left) {
+            auto tile = m_game->getGrid()->getTileFromMouse({event->mouseButton.x, event->mouseButton.y});
+            if (tile != nullptr)
+            {
+                events->take(sf::Event::EventType::MouseButtonReleased); // we found a tile, no need to look for any other GUI clicks.
+            }
+        }
+    }
+
+    Scene::update(engine, events);
+}
+
 void GameScene::onEnter(Engine *engine) {
-    m_game = std::make_unique<Game>();
 
     updateBindings();
 }
@@ -26,6 +41,9 @@ void GameScene::updateBindings() {
 }
 
 void GameScene::onGUI(Engine *engine) {
+
+    m_game->getGrid()->setPosition(150, 150);
+
     m_waveText.setFont(m_font);
     m_healthText.setFont(m_font);
     m_goldText.setFont(m_font);
@@ -35,7 +53,6 @@ void GameScene::onGUI(Engine *engine) {
     m_healthSprite.setTexture(m_healthTexture);
     m_goldTexture.loadFromFile("asset/sprite/gold.png");
     m_goldSprite.setTexture(m_goldTexture);
-
     m_exitText.setString("Exit");
 
     m_header.setSize({800, 40});
@@ -76,4 +93,5 @@ void GameScene::draw(sf::RenderWindow &window) const {
     window.draw(m_healthSprite);
     window.draw(m_goldSprite);
     window.draw(m_exitButton);
+    window.draw(*m_game->getGrid());
 }

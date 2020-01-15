@@ -4,8 +4,8 @@
 #include <SFML/Config.hpp>
 
 enum TileType : sf::Uint8 {
-    Pathway = 0x00,
-    Buildable = 0x01,
+    Grass,
+    Sand,
 };
 
 #endif //SFMLTEST_TILETYPE_HPP

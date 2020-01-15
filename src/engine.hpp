@@ -7,10 +7,11 @@
 #include <string>
 
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/System/NonCopyable.hpp>
 
 #define DELTA_TICKS 60
 
-class Engine {
+class Engine : sf::NonCopyable {
 public:
     explicit Engine(const char* name);
     ~Engine() = default;

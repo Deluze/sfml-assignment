@@ -6,8 +6,9 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
 
-class GameObject : public sf::Transformable, sf::Drawable {
+class GameObject : public sf::Transformable, public sf::Drawable {
 public:
+    GameObject();
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
     bool collidesWith(GameObject* gameObject);

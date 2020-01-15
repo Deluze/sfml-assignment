@@ -10,13 +10,14 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
 
-class Tile : public sf::Drawable {
+class Tile {
 public:
+    explicit Tile(TileType tileType = TileType::Grass);
     TileType getType();
     bool isBuildable();
     bool hasTower();
     void setTower(std::weak_ptr<Tower> tower);
-    void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
+    void setTileType(TileType tileType);
 private:
     TileType m_type;
     std::weak_ptr<Tower> m_tower;
