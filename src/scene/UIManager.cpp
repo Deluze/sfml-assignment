@@ -16,14 +16,14 @@ void UIManager::resolveClick(sf::Vector2i position) {
     // elements underneath the overlay, we don't want that.
     for (auto it = m_elements.rbegin(); it != m_elements.rend() ; it++) {
 
-        const auto element = *it;
+        UIElement* element = *it;
 
         // Since these are not shapes, we have to implement our own 'contains' method.
-        const auto x = static_cast<sf::Uint32>(element->getPosition().x);
-        const auto y = static_cast<sf::Uint32>(element->getPosition().y);
+		const float x = element->getPosition().x;
+		const float y = element->getPosition().y;
 
-        const auto width = static_cast<sf::Uint32>(element->getWidth());
-        const auto height = static_cast<sf::Uint32>(element->getHeight());
+		const float width = element->getWidth();
+		const float height = element->getHeight();
 
         if (position.x >= x && position.x <= x + width)
         {

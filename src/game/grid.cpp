@@ -19,8 +19,8 @@ void Grid::initialize() {
     m_tiles = tileContainer();
 
     sf::Uint32 quadNumber{0};
-    for (int col = 0; col < m_tiles.size(); ++col) {
-        for (int row = 0; row < m_tiles[col].size(); ++row) {
+    for (unsigned int col = 0; col < m_tiles.size(); ++col) {
+        for (unsigned int row = 0; row < m_tiles[col].size(); ++row) {
             auto tile = m_tiles[col][row];
 
             sf::Uint8 tileType = tile.getType();

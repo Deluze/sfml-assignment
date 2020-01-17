@@ -18,6 +18,7 @@ class Scene
 public:
     explicit Scene()
     {
+		// This is the generic font being used in every scene.
         m_font.loadFromFile("asset/font/Arial.ttf");
     }
 

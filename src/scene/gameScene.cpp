@@ -56,29 +56,29 @@ void GameScene::onGUI(Engine *engine) {
     m_goldSprite.setTexture(m_goldTexture);
     m_exitText.setString("Exit");
 
-    m_header.setSize({800, 40});
+    m_header.setSize({800.f, 40.f});
     m_header.setFillColor(sf::Color{255, 255, 255, 50});
 
-    m_footer.setSize({800, 120});
+    m_footer.setSize({800.f, 120.f});
     m_footer.setFillColor(sf::Color{255, 255, 255, 50});
-    m_footer.setPosition({0, 800 - m_footer.getSize().y});
+    m_footer.setPosition({0.f, 800.f - m_footer.getSize().y});
 
-    m_healthSprite.setPosition(600, 10);
-    m_healthText.setPosition(630, 10);
+    m_healthSprite.setPosition(600.f, 10.f);
+    m_healthText.setPosition(630.f, 10.f);
     m_healthText.setCharacterSize(15);
 
-    m_goldSprite.setPosition(450, 10);
-    m_goldText.setPosition(480, 10);
+    m_goldSprite.setPosition(450.f, 10.f);
+    m_goldText.setPosition(480.f, 10.f);
     m_goldText.setCharacterSize(15);
 
-    m_waveText.setPosition(700, 10);
+    m_waveText.setPosition(700.f, 10.f);
     m_waveText.setCharacterSize(15);
 
-    m_levelText.setPosition(150, 10);
+    m_levelText.setPosition(150.f, 10.f);
     m_levelText.setCharacterSize(15);
 
-    m_exitButton = createElement<Button>(m_exitText, 100, 40);
-    m_exitButton.setPosition(0, 0);
+    m_exitButton = createElement<Button>(m_exitText, 100.f, 40.f);
+    m_exitButton.setPosition(0.f, 0.f);
     m_exitButton.bindClick( [engine](){ engine->getSceneManager()->setScene<LevelSelectorScene>(); });
     m_exitButton.setBackgroundColor(sf::Color{255, 0, 0, 128});
     registerElement(&m_exitButton);

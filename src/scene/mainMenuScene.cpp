@@ -31,9 +31,9 @@ void MainMenuScene::onGUI(Engine *engine) {
     m_playButtonText.setFont(m_font);
     m_playButtonText.setString("Play!");
 
-    m_playButton = createElement<Button>(m_playButtonText, 200, 50);
+    m_playButton = createElement<Button>(m_playButtonText, 200.f, 50.f);
     m_playButton.setBackgroundColor(sf::Color{214, 47, 75});
-    m_playButton.setPosition(0, 100);
+    m_playButton.setPosition(0.f, 100.f);
     m_playButton.bindClick([this, engine]() {onPlay(engine);});
 
     registerElement(&m_playButton);
@@ -42,9 +42,9 @@ void MainMenuScene::onGUI(Engine *engine) {
     m_quitButtonText.setString("Quit");
     m_quitButtonText.setCharacterSize(15);
 
-    m_quitButton = createElement<Button>(m_quitButtonText, 150, 20);
+    m_quitButton = createElement<Button>(m_quitButtonText, 150.f, 20.f);
     m_quitButton.setBackgroundColor(sf::Color{122, 20, 37});
-    m_quitButton.setPosition(0, 175);
+    m_quitButton.setPosition(0.f, 175.f);
     m_quitButton.bindClick([this, engine]() {onQuit(engine);});
 
     registerElement(&m_quitButton);
