@@ -9,6 +9,7 @@ Engine::Engine(const char* name) : m_name(name), m_running(false)
 void Engine::initialize()
 {
     m_window.create(sf::VideoMode(800, 800), m_name, sf::Style::Titlebar | sf::Style::Close);
+	m_window.setFramerateLimit(144);
     m_sceneManager.setEngineContext(this);
 }
 
