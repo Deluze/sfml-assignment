@@ -14,12 +14,6 @@ void LevelSelectorScene::draw(sf::RenderWindow &window) const {
 	window.draw(m_playButton);
 }
 
-void LevelSelectorScene::onBack(Engine *engine) {
-	auto sceneManager = engine->getSceneManager();
-	sceneManager->setScene<MainMenuScene>();
-}
-
-
 void LevelSelectorScene::parseLevels() {
 	m_levels.push_back("Test Level");
 }
@@ -92,7 +86,7 @@ void LevelSelectorScene::onGUI(Engine *engine) {
 	m_playButton = createElement<Button>(m_playButtonText, 210.f, 60.f);
 	m_playButton.setPosition(300.f, 480.f);
 	m_playButton.setBackgroundColor(sf::Color{ 65, 161, 18 });
-	m_playButton.bindClick([this, engine]() {onPlay(engine); });
+	m_playButton.bindClick([this, engine]() { engine->getSceneManager()->setScene<GameScene>(getLevelName()); });
 	registerElement(&m_playButton);
 }
 
@@ -100,10 +94,6 @@ void LevelSelectorScene::onEnter(Engine *engine) {
 	parseLevels();
 
 	updateBindings();
-}
-
-void LevelSelectorScene::onPlay(Engine *engine) {
-	engine->getSceneManager()->setScene<GameScene>(getLevelName());
 }
 
 void LevelSelectorScene::updateBindings() {

@@ -13,8 +13,6 @@ public:
     void onGUI(Engine *engine) override;
     void draw(sf::RenderWindow &window) const override;
 private:
-    void onPlay(Engine* engine);
-    void onBack(Engine* engine);
     void parseLevels();
     void swapLevel(sf::Uint32 level);
     bool hasNextLevel();

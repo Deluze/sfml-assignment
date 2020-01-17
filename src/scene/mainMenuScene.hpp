@@ -23,9 +23,6 @@ private:
 
     sf::Text m_quitButtonText;
     Button m_quitButton;
-
-    void onPlay(Engine* engine);
-    void onQuit(Engine* engine);
 };
 
 
