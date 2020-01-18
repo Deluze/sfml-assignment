@@ -26,6 +26,7 @@ public:
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
     Tile::Ptr getTileFromMouse(sf::Vector2i vector);
     Tile::Ptr getTileFromPosition(sf::Vector2f vector);
+    sf::Vector2f getTileWindowPosition(const Tile::Ptr& tile);
 private:
     tileContainer m_tiles;
     sf::VertexArray m_vertices;

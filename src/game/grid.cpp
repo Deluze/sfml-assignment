@@ -1,7 +1,6 @@
 #include "grid.hpp"
 
 #include <cmath>
-#include <iostream>
 
 Grid::Grid() : m_vertices(sf::VertexArray{sf::PrimitiveType::Quads, LEVEL_HEIGHT * LEVEL_WIDTH * 4})
 {
@@ -17,7 +16,7 @@ void Grid::draw(sf::RenderTarget &target, sf::RenderStates states) const
 }
 
 void Grid::initialize() {
-    sf::Uint32 quadNumber{0};
+    unsigned int quadNumber{0};
     for (unsigned int row = 0; row < m_tiles.size(); ++row) {
         for (unsigned int col = 0; col < m_tiles[row].size(); ++col) {
             // Lets assume the tiles should always be re-initialized, even if they already were.
@@ -56,14 +55,23 @@ Tile::Ptr Grid::getTileFromPosition(sf::Vector2f vector) {
     const float xRelative = vector.x - position.x;
     const float yRelative = vector.y - position.y;
 
-    constexpr sf::Uint32 xMax = LEVEL_WIDTH * TILE_SIZE;
-    constexpr sf::Uint32 yMax = LEVEL_HEIGHT * TILE_SIZE;
+    constexpr unsigned int xMax = LEVEL_WIDTH * TILE_SIZE;
+    constexpr unsigned int yMax = LEVEL_HEIGHT * TILE_SIZE;
 
     if(xRelative < 0 || yRelative < 0) return nullptr;
     if(xRelative > xMax || yRelative > yMax) return nullptr;
 
-    auto col = static_cast<sf::Uint32>(std::floor(xRelative / TILE_SIZE));
-    auto row = static_cast<sf::Uint32>(std::floor(yRelative / TILE_SIZE));
+    auto col = static_cast<unsigned int>(std::floor(xRelative / TILE_SIZE));
+    auto row = static_cast<unsigned int>(std::floor(yRelative / TILE_SIZE));
 
     return m_tiles[col][row];
+}
+
+sf::Vector2f Grid::getTileWindowPosition(const Tile::Ptr& tile) {
+    sf::Vector2f gridPosition = getPosition();
+
+    const auto xRelative = static_cast<float>(tile->getX() * TILE_SIZE);
+    const auto yRelative = static_cast<float>(tile->getY() * TILE_SIZE);
+
+    return sf::Vector2f{gridPosition.x + xRelative, gridPosition.y + yRelative};
 }

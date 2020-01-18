@@ -9,7 +9,11 @@ Engine::Engine(const char* name) : m_name(name), m_running(false)
 void Engine::initialize()
 {
     m_window.create(sf::VideoMode(800, 800), m_name, sf::Style::Titlebar | sf::Style::Close);
+
+    // we set a frame limit, just in case. Seems like SFML doesn't have a standard cap
+    // and we don't want to use all of our GPU power.
 	m_window.setFramerateLimit(144);
+
     m_sceneManager.setEngineContext(this);
 }
 
@@ -40,22 +44,23 @@ void Engine::loop()
      */
     while(m_running)
     {
-        m_window.clear();
+        //Engine logic
         m_eventManager.clear();
-
         EventBag* eventBag = m_eventManager.checkForEvents(m_window);
 
         lastFrame = clock.getElapsedTime().asMilliseconds();
 
+        //Game logic
         while(lastFrame >= timeBetweenFixedUpdated)
         {
             lastFrame -= timeBetweenFixedUpdated;
             m_sceneManager.fixedUpdate(eventBag);
         }
-
         m_sceneManager.update(eventBag);
-        m_sceneManager.draw(m_window);
 
+        //Render
+        m_window.clear();
+        m_sceneManager.draw(m_window);
         m_window.display();
     }
 }
