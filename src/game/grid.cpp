@@ -1,6 +1,7 @@
 #include "grid.hpp"
 
 #include <cmath>
+#include <iostream>
 
 Grid::Grid() : m_vertices(sf::VertexArray{sf::PrimitiveType::Quads, LEVEL_HEIGHT * LEVEL_WIDTH * 4})
 {
@@ -16,17 +17,12 @@ void Grid::draw(sf::RenderTarget &target, sf::RenderStates states) const
 }
 
 void Grid::initialize() {
-    m_tiles = tileContainer();
-
     sf::Uint32 quadNumber{0};
     for (unsigned int col = 0; col < m_tiles.size(); ++col) {
         for (unsigned int row = 0; row < m_tiles[col].size(); ++row) {
-            Tile::Ptr tile = m_tiles[col][row];
-
             // Lets assume the tiles should always be re-initialized, even if they already were.
-            tile = std::make_shared<Tile>(TileType::Grass, col, row);
+            auto tile = m_tiles[col][row] = std::make_shared<Tile>(TileType::Grass, col, row);
 
-            sf::Uint8 tileType = tile->getType();
             sf::Vertex* quad = &m_vertices[quadNumber * 4];
 
             quad[0].position = {static_cast<float>(col * TILE_SIZE), static_cast<float>(row * TILE_SIZE)};
