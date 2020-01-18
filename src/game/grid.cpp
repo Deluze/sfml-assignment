@@ -21,9 +21,12 @@ void Grid::initialize() {
     sf::Uint32 quadNumber{0};
     for (unsigned int col = 0; col < m_tiles.size(); ++col) {
         for (unsigned int row = 0; row < m_tiles[col].size(); ++row) {
-            auto tile = m_tiles[col][row];
+            Tile::Ptr tile = m_tiles[col][row];
 
-            sf::Uint8 tileType = tile.getType();
+            // Lets assume the tiles should always be re-initialized, even if they already were.
+            tile = std::make_shared<Tile>(TileType::Grass, col, row);
+
+            sf::Uint8 tileType = tile->getType();
             sf::Vertex* quad = &m_vertices[quadNumber * 4];
 
             quad[0].position = {static_cast<float>(col * TILE_SIZE), static_cast<float>(row * TILE_SIZE)};
@@ -31,24 +34,26 @@ void Grid::initialize() {
             quad[2].position = {static_cast<float>((col + 1) * TILE_SIZE), static_cast<float>((row + 1) * TILE_SIZE)};
             quad[3].position = {static_cast<float>(col * TILE_SIZE), static_cast<float>((row + 1) * TILE_SIZE)};
 
-            quad[0].texCoords = {static_cast<float>(tileType * TILE_SIZE), 0};
-            quad[1].texCoords = {static_cast<float>((tileType + 1) * TILE_SIZE), 0};
-            quad[2].texCoords = {static_cast<float>((tileType + 1) * TILE_SIZE), TILE_SIZE};
-            quad[3].texCoords = {static_cast<float>(tileType * TILE_SIZE), TILE_SIZE};
+            sf::Rect<int> texCoords = tile->getTexCoords();
+
+            quad[0].texCoords = {static_cast<float>(texCoords.left), static_cast<float>(texCoords.top)};
+            quad[1].texCoords = {static_cast<float>(texCoords.left + texCoords.width), static_cast<float>(texCoords.top)};
+            quad[2].texCoords = {static_cast<float>(texCoords.left + texCoords.width), static_cast<float>(texCoords.top + texCoords.height)};
+            quad[3].texCoords = {static_cast<float>(texCoords.left), static_cast<float>(texCoords.top + texCoords.height)};
 
             quadNumber++;
         }
     }
 }
 
-Tile *Grid::getTileFromMouse(sf::Vector2i vector) {
+Tile::Ptr Grid::getTileFromMouse(sf::Vector2i vector) {
     return getTileFromPosition({
         static_cast<float>(vector.x),
         static_cast<float>(vector.y)
     });
 }
 
-Tile *Grid::getTileFromPosition(sf::Vector2f vector) {
+Tile::Ptr Grid::getTileFromPosition(sf::Vector2f vector) {
 
     sf::Vector2f position = getPosition();
 
@@ -64,5 +69,5 @@ Tile *Grid::getTileFromPosition(sf::Vector2f vector) {
     auto col = static_cast<sf::Uint32>(std::floor(xRelative / TILE_SIZE));
     auto row = static_cast<sf::Uint32>(std::floor(yRelative / TILE_SIZE));
 
-    return &m_tiles[col][row];
+    return m_tiles[col][row];
 }

@@ -12,15 +12,22 @@
 
 class Tile {
 public:
-    explicit Tile(TileType tileType = TileType::Grass);
+    using Ptr = std::shared_ptr<Tile>;
+
+    explicit Tile(TileType type, unsigned int x, unsigned int y);
     TileType getType();
     bool isBuildable();
     bool hasTower();
     void setTower(std::weak_ptr<Tower> tower);
     void setTileType(TileType tileType);
+
+    virtual sf::Rect<int> getTexCoords();
 private:
     TileType m_type;
     std::weak_ptr<Tower> m_tower;
+
+    unsigned int m_x;
+    unsigned int m_y;
 };
 
 

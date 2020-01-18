@@ -32,8 +32,7 @@ public:
 
     Grid* getGrid();
 
-    void handleTileClick(Tile* tile);
-    Tile* getSelectedTile();
+    void handleTileClick(Tile::Ptr tile);
 
     bool hasTowerSelected();
     Tower::Ptr getSelectedTower();
@@ -44,7 +43,6 @@ private:
 
     Grid m_grid;
 
-    Tile* m_currentSelectedTile;
     Tower::Ptr m_currentSelectedTower;
     std::vector<Tower::Ptr> m_towers;
 };

@@ -2,8 +2,7 @@
 
 #include <utility>
 
-
-Tile::Tile(TileType tileType) : m_type(tileType) {
+Tile::Tile(TileType type, unsigned int x, unsigned int y) : m_type(type), m_x(x), m_y(y){
 
 }
 
@@ -26,3 +25,8 @@ void Tile::setTower(std::weak_ptr<Tower> tower) {
 void Tile::setTileType(TileType tileType) {
     m_type = tileType;
 }
+
+sf::Rect<int> Tile::getTexCoords() {
+    return sf::Rect<int>(0, 0, 50, 50);
+}
+

@@ -68,16 +68,8 @@ Grid *Game::getGrid() {
     return &m_grid;
 }
 
-void Game::handleTileClick(Tile *tile) {
-    m_currentSelectedTile = tile;
+void Game::handleTileClick(Tile::Ptr tile) {
 
-    if(tile->hasTower()) return; // TODO: Open window with tower upgrades?
-
-    if(hasTowerSelected()) {
-        auto tower = getSelectedTower();
-        m_towers.push_back(tower);
-        tile->setTower(tower);
-    }
 }
 
 bool Game::hasTowerSelected() {
@@ -86,8 +78,4 @@ bool Game::hasTowerSelected() {
 
 Tower::Ptr Game::getSelectedTower() {
     return m_currentSelectedTower;
-}
-
-Tile *Game::getSelectedTile() {
-    return m_currentSelectedTile;
 }

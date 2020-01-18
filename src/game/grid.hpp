@@ -19,13 +19,13 @@
 
 class Grid : public sf::Drawable, public sf::Transformable {
 
-    using tileContainer = std::array<std::array<Tile, LEVEL_WIDTH>, LEVEL_HEIGHT>;
+    using tileContainer = std::array<std::array<Tile::Ptr, LEVEL_WIDTH>, LEVEL_HEIGHT>;
 public:
     Grid();
     void initialize();
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
-    Tile* getTileFromMouse(sf::Vector2i vector);
-    Tile* getTileFromPosition(sf::Vector2f vector);
+    Tile::Ptr getTileFromMouse(sf::Vector2i vector);
+    Tile::Ptr getTileFromPosition(sf::Vector2f vector);
 private:
     tileContainer m_tiles;
     sf::VertexArray m_vertices;
