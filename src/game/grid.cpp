@@ -34,12 +34,12 @@ void Grid::initialize() {
             quad[2].position = {static_cast<float>((col + 1) * TILE_SIZE), static_cast<float>((row + 1) * TILE_SIZE)};
             quad[3].position = {static_cast<float>(col * TILE_SIZE), static_cast<float>((row + 1) * TILE_SIZE)};
 
-            sf::Rect<int> texCoords = tile->getTexCoords();
+            sf::Rect<float> texCoords = tile->getTexCoords();
 
-            quad[0].texCoords = {static_cast<float>(texCoords.left), static_cast<float>(texCoords.top)};
-            quad[1].texCoords = {static_cast<float>(texCoords.left + texCoords.width), static_cast<float>(texCoords.top)};
-            quad[2].texCoords = {static_cast<float>(texCoords.left + texCoords.width), static_cast<float>(texCoords.top + texCoords.height)};
-            quad[3].texCoords = {static_cast<float>(texCoords.left), static_cast<float>(texCoords.top + texCoords.height)};
+            quad[0].texCoords = {texCoords.left, texCoords.top};
+            quad[1].texCoords = {texCoords.left + texCoords.width, texCoords.top};
+            quad[2].texCoords = {texCoords.left + texCoords.width, texCoords.top + texCoords.height};
+            quad[3].texCoords = {texCoords.left, texCoords.top + texCoords.height};
 
             quadNumber++;
         }

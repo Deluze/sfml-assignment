@@ -21,7 +21,7 @@ public:
     void setTower(std::weak_ptr<Tower> tower);
     void setTileType(TileType tileType);
 
-    virtual sf::Rect<int> getTexCoords();
+    virtual sf::Rect<float> getTexCoords();
 private:
     TileType m_type;
     std::weak_ptr<Tower> m_tower;

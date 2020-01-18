@@ -26,7 +26,7 @@ void Tile::setTileType(TileType tileType) {
     m_type = tileType;
 }
 
-sf::Rect<int> Tile::getTexCoords() {
-    return sf::Rect<int>(0, 0, 50, 50);
+sf::Rect<float> Tile::getTexCoords() {
+    return sf::Rect<float>(0.f, 0.f, 50.f, 50.f);
 }
 
