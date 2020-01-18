@@ -18,10 +18,10 @@ void Grid::draw(sf::RenderTarget &target, sf::RenderStates states) const
 
 void Grid::initialize() {
     sf::Uint32 quadNumber{0};
-    for (unsigned int col = 0; col < m_tiles.size(); ++col) {
-        for (unsigned int row = 0; row < m_tiles[col].size(); ++row) {
+    for (unsigned int row = 0; row < m_tiles.size(); ++row) {
+        for (unsigned int col = 0; col < m_tiles[row].size(); ++col) {
             // Lets assume the tiles should always be re-initialized, even if they already were.
-            auto tile = m_tiles[col][row] = std::make_shared<Tile>(TileType::Grass, col, row);
+            auto tile = m_tiles[row][col] = std::make_shared<Tile>(TileType::Grass, col, row);
 
             sf::Vertex* quad = &m_vertices[quadNumber * 4];
 
