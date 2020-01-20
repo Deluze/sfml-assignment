@@ -38,3 +38,7 @@ unsigned int Tile::getY() {
     return m_y;
 }
 
+Tower::Ptr Tile::getTower() {
+    return m_tower.lock();
+}
+

@@ -11,10 +11,7 @@ void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     // enemy layer
 
     // tower layer
-    for(const Tower::Ptr& tower : m_towers)
-    {
-        target.draw(*tower, states);
-    }
+    target.draw(m_towerManager, states);
 }
 
 void Game::addGold(sf::Uint32 amount) {
@@ -69,7 +66,17 @@ Grid *Game::getGrid() {
 }
 
 void Game::handleTileClick(Tile::Ptr tile) {
+    if(tile->hasTower()) {
+        m_currentSelectedTower = tile->getTower();
+        return;
+    }
 
+    m_currentSelectedTower = std::make_shared<Tower>();
+
+    if(!tile->hasTower() && m_currentSelectedTower != nullptr) {
+//        m_towers.push_back(m_currentSelectedTower);
+        tile->setTower(m_currentSelectedTower);
+    }
 }
 
 bool Game::hasTowerSelected() {

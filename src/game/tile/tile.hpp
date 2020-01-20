@@ -19,6 +19,7 @@ public:
     bool isBuildable();
     bool hasTower();
     void setTower(std::weak_ptr<Tower> tower);
+    Tower::Ptr getTower();
     void setTileType(TileType tileType);
     unsigned int getX();
     unsigned int getY();

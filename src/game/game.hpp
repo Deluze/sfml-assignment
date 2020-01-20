@@ -3,6 +3,7 @@
 
 #include "grid.hpp"
 #include "tower/tower.hpp"
+#include "tower/towerManager.hpp"
 
 #include <memory>
 
@@ -42,9 +43,9 @@ private:
     sf::Uint32 m_gold;
 
     Grid m_grid;
+    TowerManager m_towerManager;
 
     Tower::Ptr m_currentSelectedTower;
-    std::vector<Tower::Ptr> m_towers;
 };
 
 
