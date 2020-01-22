@@ -4,6 +4,7 @@
 #include "grid.hpp"
 #include "tower/tower.hpp"
 #include "tower/towerManager.hpp"
+#include "wave/waveManager.hpp"
 
 #include <memory>
 
@@ -29,14 +30,15 @@ public:
     void setHealth(sf::Uint32 health);
     sf::Uint32 getHealth();
 
-    sf::Uint32 getWave();
-
     Grid* getGrid();
 
-    void handleTileClick(Tile::Ptr tile);
+    void handleTileClick(const Tile::Ptr& tile);
 
     bool hasTowerSelected();
     Tower::Ptr getSelectedTower();
+
+    TowerManager* getTowerManager();
+    WaveManager* getWaveManager();
 private:
 
     sf::Uint32 m_health;
@@ -44,6 +46,7 @@ private:
 
     Grid m_grid;
     TowerManager m_towerManager;
+    WaveManager m_waveManager;
 
     Tower::Ptr m_currentSelectedTower;
 };

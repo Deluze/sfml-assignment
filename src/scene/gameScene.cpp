@@ -33,7 +33,7 @@ void GameScene::onEnter(Engine *engine) {
 void GameScene::updateBindings() {
 
     std::ostringstream waveText;
-    waveText << "Wave: " << std::to_string(m_game->getWave());
+    waveText << "Wave: " << std::to_string(m_game->getWaveManager()->getCurrentWave());
     m_waveText.setString(waveText.str());
 
     m_healthText.setString(std::to_string(m_game->getHealth()));

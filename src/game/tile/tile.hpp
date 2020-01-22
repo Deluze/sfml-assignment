@@ -20,11 +20,8 @@ public:
     bool hasTower();
     void setTower(std::weak_ptr<Tower> tower);
     Tower::Ptr getTower();
-    void setTileType(TileType tileType);
     unsigned int getX();
     unsigned int getY();
-
-    virtual sf::Rect<float> getTexCoords();
 private:
     TileType m_type;
     std::weak_ptr<Tower> m_tower;

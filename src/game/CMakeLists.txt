@@ -11,3 +11,5 @@ target_sources(SFMLTest PRIVATE
 
 add_subdirectory(tile)
 add_subdirectory(tower)
+add_subdirectory(enemy)
+add_subdirectory(wave)

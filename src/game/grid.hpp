@@ -9,6 +9,7 @@
 
 #include <array>
 #include <cmath>
+#include <unordered_map>
 
 #include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
@@ -31,6 +32,7 @@ private:
     tileContainer m_tiles;
     sf::VertexArray m_vertices;
     sf::Texture m_tileset;
+    std::unordered_map<TileType, sf::Rect<float>> m_tileTexCoords;
 };
 
 

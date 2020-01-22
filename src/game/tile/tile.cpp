@@ -22,14 +22,6 @@ void Tile::setTower(std::weak_ptr<Tower> tower) {
     m_tower = std::move(tower);
 }
 
-void Tile::setTileType(TileType tileType) {
-    m_type = tileType;
-}
-
-sf::Rect<float> Tile::getTexCoords() {
-    return sf::Rect<float>(0.f, 0.f, 50.f, 50.f);
-}
-
 unsigned int Tile::getX() {
     return m_x;
 }

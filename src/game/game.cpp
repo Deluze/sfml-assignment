@@ -2,6 +2,7 @@
 
 Game::Game() : m_health(100), m_gold(1000) {
     m_grid.initialize();
+    m_towerManager.initialize();
 }
 
 void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const {
@@ -57,25 +58,36 @@ void Game::setHealth(sf::Uint32 health) {
     m_health = health;
 }
 
-sf::Uint32 Game::getWave() {
-    return 0;
-}
-
 Grid *Game::getGrid() {
     return &m_grid;
 }
 
-void Game::handleTileClick(Tile::Ptr tile) {
+void Game::handleTileClick(const Tile::Ptr& tile) {
+
+    // If it's not buildable. Means that there are no turrets on here.
+    // There's nothing to do here, let's leave.
+    if(!tile->isBuildable()) {
+        return;
+    }
+
+    // Seems like there already is a tower built on this spot.
+    // We might want to upgrade this tower.
+    // Select the tower and open the upgrade
     if(tile->hasTower()) {
         m_currentSelectedTower = tile->getTower();
         return;
     }
 
-    m_currentSelectedTower = std::make_shared<Tower>();
+    m_currentSelectedTower = std::make_shared<Tower>(TowerType::Fire);
 
     if(!tile->hasTower() && m_currentSelectedTower != nullptr) {
-//        m_towers.push_back(m_currentSelectedTower);
         tile->setTower(m_currentSelectedTower);
+        m_towerManager.addTower(m_currentSelectedTower);
+
+        // Since the tower is bigger than the actual tile. A tower equals to 70 pixels on the Y axis. Time to substract that
+        // So it actually looks that the tower is on the tile.
+        sf::Vector2f towerPosition = m_grid.getTileWindowPosition(tile);
+        m_currentSelectedTower->setPosition(towerPosition.x, towerPosition.y - (70 - TILE_SIZE));
     }
 }
 
@@ -85,4 +97,12 @@ bool Game::hasTowerSelected() {
 
 Tower::Ptr Game::getSelectedTower() {
     return m_currentSelectedTower;
+}
+
+TowerManager *Game::getTowerManager() {
+    return &m_towerManager;
+}
+
+WaveManager *Game::getWaveManager() {
+    return &m_waveManager;
 }
