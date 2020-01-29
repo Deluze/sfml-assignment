@@ -9,15 +9,24 @@
 class LevelSelectorScene : public Scene {
 public:
     LevelSelectorScene();
+
     void onEnter(Engine *engine) override;
+
     void onGUI(Engine *engine) override;
+
     void draw(sf::RenderWindow &window) const override;
+
 private:
     void parseLevels();
+
     void swapLevel(sf::Uint32 level);
+
     bool hasNextLevel();
+
     bool hasPrevLevel();
+
     std::string getLevelName();
+
     void updateBindings();
 
     sf::Text m_backButtonText;

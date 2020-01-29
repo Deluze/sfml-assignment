@@ -9,7 +9,9 @@ class EventManager {
 
 public:
     void clear();
-    EventBag* checkForEvents(sf::RenderWindow& window);
+
+    EventBag *checkForEvents(sf::RenderWindow &window);
+
 private:
     EventBag m_bag;
 };

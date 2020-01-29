@@ -15,13 +15,21 @@ public:
     using Ptr = std::shared_ptr<Tile>;
 
     explicit Tile(TileType type, unsigned int x, unsigned int y);
+
     TileType getType();
+
     bool isBuildable();
+
     bool hasTower();
+
     void setTower(std::weak_ptr<Tower> tower);
+
     Tower::Ptr getTower();
+
     unsigned int getX();
+
     unsigned int getY();
+
 private:
     TileType m_type;
     std::weak_ptr<Tower> m_tower;

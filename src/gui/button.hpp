@@ -16,24 +16,33 @@ class Button : public UIElement, public sf::Drawable {
 public:
 
     explicit Button() = default;
+
     explicit Button(sf::Text text, float width = 100, float height = 20);
 
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
     bool isDisabled();
-    void setDisabled(const bool& disabled);
 
-    void setText(const char* text);
-    void setTextColor(const sf::Color& color);
-    void setBackgroundColor(const sf::Color& color);
-    void setCharacterSize(const sf::Uint32& size);
+    void setDisabled(const bool &disabled);
+
+    void setText(const char *text);
+
+    void setTextColor(const sf::Color &color);
+
+    void setBackgroundColor(const sf::Color &color);
+
+    void setCharacterSize(const sf::Uint32 &size);
 
     void onClick() override;
+
     void onHover() override;
+
 private:
 
     void setHeight(float height) override;
+
     void setWidth(float height) override;
+
     // If true, this UIElement does not fire events.
     bool m_disabled = false;
 

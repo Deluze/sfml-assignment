@@ -19,16 +19,20 @@ public:
 
     explicit UIElement(sf::Vector2f vector = {0, 0});
 
-    void bindClick(const ClickHandler& handler);
-    void bindHover(const HoverHandler& handler);
+    void bindClick(const ClickHandler &handler);
+
+    void bindHover(const HoverHandler &handler);
 
     virtual void onClick();
+
     virtual void onHover();
 
     float getWidth();
+
     float getHeight();
 
     virtual void setWidth(float width);
+
     virtual void setHeight(float height);
 
     virtual void update();

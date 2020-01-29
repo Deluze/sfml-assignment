@@ -13,15 +13,20 @@
 
 class Engine : sf::NonCopyable {
 public:
-    explicit Engine(const char* name);
+    explicit Engine(const char *name);
+
     ~Engine() = default;
 
     void initialize();
+
     void start();
+
     void stop();
 
-    sf::RenderWindow* getWindow();
-    SceneManager* getSceneManager();
+    sf::RenderWindow *getWindow();
+
+    SceneManager *getSceneManager();
+
 private:
 
     void loop();

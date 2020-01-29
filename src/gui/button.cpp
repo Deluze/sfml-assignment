@@ -2,13 +2,12 @@
 
 #include <utility>
 
-Button::Button(sf::Text text, float width, float height) : UIElement({width, height}), m_disabled(false), m_text(std::move(text))
-{
-    m_rectangle = sf::RectangleShape({
-        width, height
-    });
+Button::Button(sf::Text text, float width, float height) : UIElement({width, height}), m_disabled(false),
+                                                           m_text(std::move(text)) {
+    m_rectangle = sf::RectangleShape({width, height});
 
-    m_text.setPosition((width - m_text.getGlobalBounds().width) / 2, (height - m_text.getGlobalBounds().height) / 2 - 5);
+    m_text.setPosition((width - m_text.getGlobalBounds().width) / 2,
+                       (height - m_text.getGlobalBounds().height) / 2 - 5);
 }
 
 void Button::setDisabled(const bool &disabled) {
@@ -57,7 +56,7 @@ void Button::setTextColor(const sf::Color &color) {
     m_text.setFillColor(color);
 }
 
-void Button::setCharacterSize(const sf::Uint32& size) {
+void Button::setCharacterSize(const sf::Uint32 &size) {
     m_text.setCharacterSize(size);
 }
 

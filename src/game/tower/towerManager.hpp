@@ -16,10 +16,13 @@
 class TowerManager : public sf::Drawable {
 public:
     void initialize();
-    void addTower(const Tower::Ptr& tower);
-    void removeTower(const Tower::Ptr& tower);
+
+    void addTower(const Tower::Ptr &tower);
+
+    void removeTower(const Tower::Ptr &tower);
 
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
+
 private:
     std::vector<Tower::Ptr> m_towers;
     std::unordered_map<TowerType, sf::Rect<int>> m_towerTexCoords;

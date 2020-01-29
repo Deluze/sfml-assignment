@@ -2,13 +2,11 @@
 
 #include <cmath>
 
-Grid::Grid() : m_vertices(sf::VertexArray{sf::PrimitiveType::Quads, LEVEL_HEIGHT * LEVEL_WIDTH * 4})
-{
+Grid::Grid() : m_vertices(sf::VertexArray{sf::PrimitiveType::Quads, LEVEL_HEIGHT * LEVEL_WIDTH * 4}) {
     m_tileset.loadFromFile("asset/texture/tileset.png");
 }
 
-void Grid::draw(sf::RenderTarget &target, sf::RenderStates states) const
-{
+void Grid::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     states.transform *= getTransform();
     states.texture = &m_tileset;
 
@@ -22,17 +20,33 @@ void Grid::initialize() {
     // This is the level grid.. for now
     // until the level selector is build.
     unsigned int level[LEVEL_WIDTH][LEVEL_HEIGHT] = {
-            {0,1,0,0,1,1,1,1,1,1},
-            {0,1,0,0,0,0,0,0,0,1},
-            {0,1,1,1,1,1,0,1,1,1},
-            {0,0,0,0,0,1,0,1,0,0},
-            {0,0,0,0,0,1,0,1,0,0},
-            {0,1,1,1,1,1,0,1,0,0},
-            {0,1,0,0,0,0,0,1,0,0},
-            {0,1,0,0,0,0,0,1,1,0},
-            {0,1,1,1,1,0,0,0,1,0},
-            {0,0,0,0,1,1,1,1,1,0},
+            {0, 1, 0, 0, 1, 1, 1, 1, 1, 1},
+            {0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
+            {0, 1, 1, 1, 1, 1, 0, 1, 1, 1},
+            {0, 0, 0, 0, 0, 1, 0, 1, 0, 0},
+            {0, 0, 0, 0, 0, 1, 0, 1, 0, 0},
+            {0, 1, 1, 1, 1, 1, 0, 1, 0, 0},
+            {0, 1, 0, 0, 0, 0, 0, 1, 0, 0},
+            {0, 1, 0, 0, 0, 0, 0, 1, 1, 0},
+            {0, 1, 1, 1, 1, 0, 0, 0, 1, 0},
+            {0, 0, 0, 0, 1, 1, 1, 1, 1, 0},
     };
+
+    m_enemyPathingPoints.emplace_back(1, 0);
+    m_enemyPathingPoints.emplace_back(1, 2);
+    m_enemyPathingPoints.emplace_back(5, 2);
+    m_enemyPathingPoints.emplace_back(5, 5);
+    m_enemyPathingPoints.emplace_back(1, 5);
+    m_enemyPathingPoints.emplace_back(1, 8);
+    m_enemyPathingPoints.emplace_back(4, 8);
+    m_enemyPathingPoints.emplace_back(4, 9);
+    m_enemyPathingPoints.emplace_back(8, 9);
+    m_enemyPathingPoints.emplace_back(8, 7);
+    m_enemyPathingPoints.emplace_back(7, 7);
+    m_enemyPathingPoints.emplace_back(7, 2);
+    m_enemyPathingPoints.emplace_back(9, 2);
+    m_enemyPathingPoints.emplace_back(9, 0);
+    m_enemyPathingPoints.emplace_back(4, 0);
 
     unsigned int quadNumber{0};
     for (unsigned int row = 0; row < m_tiles.size(); ++row) {
@@ -40,7 +54,7 @@ void Grid::initialize() {
             // Lets assume the tiles should always be re-initialized, even if they already were.
             auto tile = m_tiles[col][row] = std::make_shared<Tile>(static_cast<TileType>(level[row][col]), col, row);
 
-            sf::Vertex* quad = &m_vertices[quadNumber * 4];
+            sf::Vertex *quad = &m_vertices[quadNumber * 4];
 
             quad[0].position = {static_cast<float>(col * TILE_SIZE), static_cast<float>(row * TILE_SIZE)};
             quad[1].position = {static_cast<float>((col + 1) * TILE_SIZE), static_cast<float>(row * TILE_SIZE)};
@@ -60,10 +74,7 @@ void Grid::initialize() {
 }
 
 Tile::Ptr Grid::getTileFromMouse(sf::Vector2i vector) {
-    return getTileFromPosition({
-        static_cast<float>(vector.x),
-        static_cast<float>(vector.y)
-    });
+    return getTileFromPosition({static_cast<float>(vector.x), static_cast<float>(vector.y)});
 }
 
 Tile::Ptr Grid::getTileFromPosition(sf::Vector2f vector) {
@@ -78,8 +89,8 @@ Tile::Ptr Grid::getTileFromPosition(sf::Vector2f vector) {
     constexpr unsigned int xMax = LEVEL_WIDTH * TILE_SIZE - 1;
     constexpr unsigned int yMax = LEVEL_HEIGHT * TILE_SIZE - 1;
 
-    if(xRelative < 0 || yRelative < 0) return nullptr;
-    if(xRelative > xMax || yRelative > yMax) return nullptr;
+    if (xRelative < 0 || yRelative < 0) return nullptr;
+    if (xRelative > xMax || yRelative > yMax) return nullptr;
 
     auto col = static_cast<unsigned int>(std::floor(xRelative / TILE_SIZE));
     auto row = static_cast<unsigned int>(std::floor(yRelative / TILE_SIZE));
@@ -87,7 +98,7 @@ Tile::Ptr Grid::getTileFromPosition(sf::Vector2f vector) {
     return m_tiles[col][row];
 }
 
-sf::Vector2f Grid::getTileWindowPosition(const Tile::Ptr& tile) {
+sf::Vector2f Grid::getTileWindowPosition(const Tile::Ptr &tile) {
     // This function is used, to calculate to find the position
     // on where to position the enemy and/or towers.
     sf::Vector2f gridPosition = getPosition();
@@ -96,4 +107,33 @@ sf::Vector2f Grid::getTileWindowPosition(const Tile::Ptr& tile) {
     const auto xRelative = static_cast<float>(tile->getX() * TILE_SIZE);
 
     return sf::Vector2f{gridPosition.x + xRelative, gridPosition.y + yRelative};
+}
+
+sf::Vector2i Grid::getEnemySpawnTileCoordinate() {
+    if (m_enemyPathingPoints.empty()) {
+        throw std::logic_error("No enemy spawn point set");
+    }
+
+    return *m_enemyPathingPoints.begin();
+}
+
+sf::Vector2i Grid::getEnemyTargetTileCoordinate() {
+    if (m_enemyPathingPoints.empty()) {
+        throw std::logic_error("No enemy target point set");
+    }
+
+    return *m_enemyPathingPoints.end();
+}
+
+sf::Vector2i Grid::getEnemyPathTileCoordinate(unsigned int pathIndex) {
+    return m_enemyPathingPoints[pathIndex];
+}
+
+Tile::Ptr Grid::getTileFromCoordinate(sf::Vector2i vector) {
+
+    if (vector.x >= m_tiles.size() || vector.y >= m_tiles[vector.x].size()) {
+        return nullptr;
+    }
+
+    return m_tiles[vector.x][vector.y];
 }

@@ -7,3 +7,5 @@ target_sources(SFMLTest PRIVATE
         ${PATH}/towerManager.hpp
         ${PATH}/towerManager.cpp
 )
+
+add_subdirectory(component)

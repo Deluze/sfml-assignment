@@ -1,24 +1,23 @@
 #include "engine.hpp"
 #include "scene/mainMenuScene.hpp"
 
-Engine::Engine(const char* name) : m_name(name), m_running(false)
-{
+#include <iostream>
+
+Engine::Engine(const char *name) : m_name(name), m_running(false) {
 
 }
 
-void Engine::initialize()
-{
+void Engine::initialize() {
     m_window.create(sf::VideoMode(800, 800), m_name, sf::Style::Titlebar | sf::Style::Close);
 
     // we set a frame limit, just in case. Seems like SFML doesn't have a standard cap
     // and we don't want to use all of our GPU power.
-	m_window.setFramerateLimit(144);
+    m_window.setFramerateLimit(144);
 
     m_sceneManager.setEngineContext(this);
 }
 
-void Engine::start()
-{
+void Engine::start() {
     // default scene
     m_sceneManager.setScene<MainMenuScene>();
 
@@ -28,34 +27,32 @@ void Engine::start()
 }
 
 
-void Engine::stop()
-{
+void Engine::stop() {
     m_running = false;
 }
 
-void Engine::loop()
-{
+void Engine::loop() {
     sf::Clock clock;
     sf::Uint32 lastFrame;
+    sf::Uint32 catchedUpFrames{0};
     constexpr sf::Uint32 timeBetweenFixedUpdated = 1000 / DELTA_TICKS;
 
     /**
      * Main thread loop. Used for UI/Events
      */
-    while(m_running)
-    {
+    while (m_running) {
         //Engine logic
         m_eventManager.clear();
-        EventBag* eventBag = m_eventManager.checkForEvents(m_window);
+        EventBag *eventBag = m_eventManager.checkForEvents(m_window);
 
         lastFrame = clock.getElapsedTime().asMilliseconds();
 
         //Game logic
-        while(lastFrame >= timeBetweenFixedUpdated)
-        {
-            lastFrame -= timeBetweenFixedUpdated;
+        while (lastFrame - catchedUpFrames > timeBetweenFixedUpdated) {
+            catchedUpFrames += timeBetweenFixedUpdated;
             m_sceneManager.fixedUpdate(eventBag);
         }
+
         m_sceneManager.update(eventBag);
 
         //Render

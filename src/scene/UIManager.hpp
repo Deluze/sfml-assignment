@@ -10,10 +10,12 @@
 
 class UIManager {
 public:
-    void registerElement(UIElement* element);
+    void registerElement(UIElement *element);
+
     void resolveClick(sf::Vector2i position);
+
 private:
-    std::vector<UIElement*> m_elements;
+    std::vector<UIElement *> m_elements;
 };
 
 

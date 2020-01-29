@@ -1,7 +1,7 @@
 #include "tower.hpp"
 
 
-Tower::Tower(TowerType towerType) : m_type(towerType), m_range(0), m_damage(0) {
+Tower::Tower(TowerType towerType) : m_type(towerType), m_range(0), m_damage(0), m_fireRate(0) {
 
 }
 
@@ -13,6 +13,10 @@ void Tower::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 
 sf::Uint8 Tower::getRange() {
     return m_range;
+}
+
+sf::Uint16 Tower::getFireRate() {
+    return m_fireRate;
 }
 
 sf::Uint32 Tower::getDamage() {
@@ -27,4 +31,3 @@ void Tower::setTexture(const sf::Texture &texture, sf::Rect<int> textureCoords) 
 TowerType Tower::getTowerType() {
     return m_type;
 }
-

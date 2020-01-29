@@ -14,6 +14,7 @@ public:
     MainMenuScene();
 
     void onGUI(Engine *engine) override;
+
     void draw(sf::RenderWindow &window) const override;
 
 private:

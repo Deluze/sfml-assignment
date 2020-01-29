@@ -13,11 +13,10 @@ class Engine;
 class SceneManager {
 public:
     template<class SceneClass, class ...Args>
-    void setScene(Args... args)
-    {
-       if(m_scene != nullptr) {
-           m_scene->onLeave(m_engine);
-       }
+    void setScene(Args... args) {
+        if (m_scene != nullptr) {
+            m_scene->onLeave(m_engine);
+        }
 
         m_scene.reset();
         m_scene = std::make_unique<SceneClass>(args...);
@@ -25,13 +24,17 @@ public:
         m_scene->onEnter(m_engine);
     }
 
-    void fixedUpdate(EventBag* events);
-    void update(EventBag* event);
-    void draw(sf::RenderWindow& window) const;
-    void setEngineContext(Engine* game);
+    void fixedUpdate(EventBag *events);
+
+    void update(EventBag *event);
+
+    void draw(sf::RenderWindow &window) const;
+
+    void setEngineContext(Engine *game);
+
 private:
     std::unique_ptr<Scene> m_scene;
-    Engine* m_engine;
+    Engine *m_engine;
 };
 
 #endif //SFMLTEST_SCENEMANAGER_HPP

@@ -3,11 +3,9 @@
 
 #include <SFML/System.hpp>
 
-enum EnemyType : sf::Uint8
-{
-    Base = 0x00, // not used
-    Ground = 0x01,
-    Air = 0x02,
+enum EnemyType : sf::Uint8 {
+    GroundEnemy,
+    AirEnemy,
 };
 
 #endif //SFMLTEST_ENEMYTYPE_HPP

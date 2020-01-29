@@ -2,8 +2,7 @@
 
 #include <SFML/Graphics/CircleShape.hpp>
 
-int main()
-{
+int main() {
     auto engine = new Engine("My Engine :)");
 
     engine->initialize();

@@ -2,10 +2,10 @@
 
 #include <SFML/Window/Event.hpp>
 
-EventBag* EventManager::checkForEvents(sf::RenderWindow &window) {
+EventBag *EventManager::checkForEvents(sf::RenderWindow &window) {
     sf::Event theEvent{};
 
-    while(window.pollEvent(theEvent)) {
+    while (window.pollEvent(theEvent)) {
         m_bag.add(theEvent.type, theEvent);
     }
 

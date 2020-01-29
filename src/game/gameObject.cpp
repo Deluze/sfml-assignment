@@ -12,13 +12,13 @@ void GameObject::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 
 bool GameObject::collidesWith(GameObject *gameObject) {
     sf::Rect<float> currentRect(getPosition(), {
-        m_width,
-        m_height
+            m_width,
+            m_height
     });
 
     sf::Rect<float> targetRect(gameObject->getPosition(), {
-        gameObject->getWidth(),
-        gameObject->getHeight()
+            gameObject->getWidth(),
+            gameObject->getHeight()
     });
 
     return currentRect.intersects(targetRect);

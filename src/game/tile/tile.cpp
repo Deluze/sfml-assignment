@@ -2,7 +2,7 @@
 
 #include <utility>
 
-Tile::Tile(TileType type, unsigned int x, unsigned int y) : m_type(type), m_x(x), m_y(y){
+Tile::Tile(TileType type, unsigned int x, unsigned int y) : m_type(type), m_x(x), m_y(y) {
 
 }
 

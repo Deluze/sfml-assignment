@@ -16,10 +16,16 @@ class GameScene : public Scene {
 public:
     explicit GameScene(std::string levelName);
 
+    void fixedUpdate(Engine *engine, EventBag *events) override;
+
     void update(Engine *engine, EventBag *events) override;
+
     void onEnter(Engine *engine) override;
+
     void onGUI(Engine *engine) override;
+
     void draw(sf::RenderWindow &window) const override;
+
 private:
     void updateBindings();
 
@@ -28,6 +34,9 @@ private:
     sf::Text m_goldText;
     sf::Text m_exitText;
     sf::Text m_levelText;
+    sf::Text m_nextWaveText;
+    sf::Text m_remainingTimeUntilNextWaveText;
+    sf::Text m_remainingEnemiesCountText;
 
     sf::Sprite m_groundSprite;
     sf::Texture m_groundTexture;
@@ -43,8 +52,11 @@ private:
 
     Button m_exitButton;
 
+    Button m_nextWaveButton;
+
     std::string m_levelName;
-    std::unique_ptr<Game> m_game;
+
+    Game m_game;
 };
 
 

@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-void UIManager::registerElement(UIElement* element) {
+void UIManager::registerElement(UIElement *element) {
     m_elements.push_back(element);
 }
 
@@ -14,21 +14,19 @@ void UIManager::resolveClick(sf::Vector2i position) {
     // ui elements need to be rendered on top of each other
     // e.g. if there's an overlay. you would still be clicking on
     // elements underneath the overlay, we don't want that.
-    for (auto it = m_elements.rbegin(); it != m_elements.rend() ; it++) {
+    for (auto it = m_elements.rbegin(); it != m_elements.rend(); it++) {
 
-        UIElement* element = *it;
+        UIElement *element = *it;
 
         // Since these are not shapes, we have to implement our own 'contains' method.
-		const float x = element->getPosition().x;
-		const float y = element->getPosition().y;
+        const float x = element->getPosition().x;
+        const float y = element->getPosition().y;
 
-		const float width = element->getWidth();
-		const float height = element->getHeight();
+        const float width = element->getWidth();
+        const float height = element->getHeight();
 
-        if (position.x >= x && position.x <= x + width)
-        {
-            if (position.y >= y && position.y <= y + height)
-            {
+        if (position.x >= x && position.x <= x + width) {
+            if (position.y >= y && position.y <= y + height) {
                 // we are not going to click on underlying elements.
                 return element->onClick();
             }
