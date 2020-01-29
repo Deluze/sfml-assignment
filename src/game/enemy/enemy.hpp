@@ -74,8 +74,6 @@ private:
 
     // The amount of Y this enemy has to move each tick
     float m_moveY;
-
-    PathHandler m_pathHandler;
 };
 
 
