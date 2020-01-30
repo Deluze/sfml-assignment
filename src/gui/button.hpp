@@ -39,10 +39,6 @@ public:
 
 private:
 
-    void setHeight(float height) override;
-
-    void setWidth(float height) override;
-
     // If true, this UIElement does not fire events.
     bool m_disabled = false;
 

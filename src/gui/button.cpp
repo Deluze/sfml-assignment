@@ -37,7 +37,7 @@ void Button::onHover() {
 }
 
 void Button::draw(sf::RenderTarget &target, sf::RenderStates states) const {
-    states.transform = getTransform();
+    states.transform *= getTransform();
 
     target.draw(m_rectangle, states);
     target.draw(m_text, states);
@@ -59,12 +59,3 @@ void Button::setTextColor(const sf::Color &color) {
 void Button::setCharacterSize(const sf::Uint32 &size) {
     m_text.setCharacterSize(size);
 }
-
-void Button::setHeight(float height) {
-    UIElement::setHeight(height);
-}
-
-void Button::setWidth(float height) {
-    UIElement::setWidth(height);
-}
-
