@@ -4,8 +4,7 @@
 #include <cmath>
 #include <utility>
 
-
-Tower::Tower(TowerType towerType) : m_type(towerType), m_range(2), m_damage(0), m_fireRate(0), m_selected(false) {
+Tower::Tower(TowerType towerType) : m_type(towerType), m_range(2), m_damage(5), m_fireRate(500), m_selected(false) {
     m_radiusShape.setFillColor(sf::Color{235, 79, 52, 128});
 }
 
@@ -62,11 +61,7 @@ void Tower::validateLockOn() {
     // of this towers radius.
     // if not, deselect the current focused enemy.
 
-    if (!hasLockOn()) {
-        return;
-    }
-
-    if (!isInRange(getLockOn())) {
+    if (!hasLockOn() || !isInRange(getLockOn())) {
         m_focussedEnemy.reset();
     }
 }
@@ -79,8 +74,17 @@ bool Tower::isInRange(const Enemy::Ptr &enemy) {
     // https://stackoverflow.com/a/40259331
     // also have to take the radius shape hit box thing in consideration..
     // because, again we didn't work with origins :(
-    float distance = std::hypot((enemy->getPosition().x - getPosition().x - m_radiusShape.getPosition().x),
+    const float distance = std::hypot((enemy->getPosition().x - getPosition().x - m_radiusShape.getPosition().x),
                                 (enemy->getPosition().y - getPosition().y - m_radiusShape.getPosition().y));
 
     return distance <= static_cast<float>(getRange() * TILE_SIZE);
+}
+
+void Tower::shoot() {
+    if(hasLockOn()) {
+        if(m_lastShot.getElapsedTime().asMilliseconds() >= getFireRate()) {
+            getLockOn()->takeDamage(getDamage());
+            m_lastShot.restart();
+        }
+    }
 }

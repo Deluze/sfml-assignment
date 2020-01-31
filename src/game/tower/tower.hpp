@@ -32,6 +32,8 @@ public:
 
     void lockOn(std::weak_ptr<Enemy> enemy);
 
+    void shoot();
+
     bool isInRange(const Enemy::Ptr& enemy);
 
     unsigned int getRange();

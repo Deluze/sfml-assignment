@@ -29,12 +29,20 @@ void TowerManager::draw(sf::RenderTarget &target, sf::RenderStates states) const
 }
 
 void TowerManager::handleEnemyLockOn(EnemyManager *enemyManager) {
-    for (auto tower : m_towers) {
-        if(tower->hasLockOn()) {
+    for (const auto& tower : m_towers) {
+        if (tower->hasLockOn()) {
             tower->validateLockOn();
             continue;
         }
 
         enemyManager->tryGetLockOn(tower);
+    }
+}
+
+void TowerManager::tick() {
+    for (const auto &tower : m_towers) {
+        if(tower->hasLockOn()) {
+            tower->shoot();
+        }
     }
 }

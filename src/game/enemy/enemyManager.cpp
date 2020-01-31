@@ -56,7 +56,7 @@ void EnemyManager::handleEnemyPathing(const Grid &grid) {
 
         if (sf::Vector2<float>({targetPosition.x + 25.f, targetPosition.y + 25.f}) == enemy->getPosition()) {
             // enemy reached destination
-            enemy->kill();
+            enemy->reachGoal();
         }
 
         const Direction direction = grid.determineDirection(enemy->getPosition(),

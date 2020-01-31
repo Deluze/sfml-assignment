@@ -18,6 +18,8 @@ class TowerManager : public sf::Drawable {
 public:
     void initialize();
 
+    void tick();
+
     void addTower(const Tower::Ptr &tower);
 
     void removeTower(const Tower::Ptr &tower);

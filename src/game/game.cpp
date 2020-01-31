@@ -9,6 +9,8 @@ Game::Game() : m_health(100), m_gold(1000) {
 
 void Game::tick() {
     m_enemyManager.tick();
+    m_towerManager.tick();
+
     m_enemyManager.handleEnemyPathing(m_grid);
     m_towerManager.handleEnemyLockOn(&m_enemyManager);
     spawnEnemies();
@@ -180,7 +182,8 @@ void Game::spawnEnemy(const Enemy::Ptr &enemy) {
     // We need to center our spawned enemy in the center of the tile.
     // And we always do these calculations relative to the top left side of the tile
     enemy->setPosition(windowPosition.x + 25.f, windowPosition.y + 25.f);
-    enemy->setGoalHandler(std::bind(&Game::onEnemyDestination, this, enemy));
+    enemy->setGoalHandler(std::bind(&Game::onEnemyDestination, this, std::placeholders::_1));
+    enemy->setEnemyDeadHandler(std::bind(&Game::onEnemyKilled, this, std::placeholders::_1));
 }
 
 void Game::onEnemyDestination(const Enemy::Ptr &enemy) {
@@ -191,4 +194,8 @@ void Game::onEnemyDestination(const Enemy::Ptr &enemy) {
 void Game::deselectTower() {
     m_currentSelectedTower->setSelected(false);
     m_currentSelectedTower.reset();
+}
+
+void Game::onEnemyKilled(const Enemy::Ptr &enemy) {
+    m_enemyManager.removeEnemy(enemy);
 }

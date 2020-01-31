@@ -13,6 +13,9 @@ Enemy::Enemy(unsigned int health, EnemyType type, bool isBoss)
 
     m_foreGroundHealthbar.setSize({HEALTH_BAR_LENGTH, HEALTH_BAR_HEIGHT});
     m_backGroundHealthbar.setSize({HEALTH_BAR_LENGTH, HEALTH_BAR_HEIGHT});
+
+    m_foreGroundHealthbar.setPosition(-HEALTH_BAR_LENGTH / 2.f, -20.f);
+    m_backGroundHealthbar.setPosition(-HEALTH_BAR_LENGTH / 2.f, -20.f);
 }
 
 void Enemy::draw(sf::RenderTarget &target, sf::RenderStates states) const {
@@ -27,10 +30,11 @@ void Enemy::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 }
 
 void Enemy::takeDamage(unsigned int damage) {
-    if (damage > m_health) {
+    if (damage >= m_health) {
         m_health = 0;
-        return;
+        return kill();
     }
+
     m_health -= damage;
 
     const float healthPercentage = 100.f / static_cast<float>(m_initialHealth) * static_cast<float>(m_health);
@@ -84,15 +88,6 @@ void Enemy::step() {
     } else m_distance = 0;
 
     move(m_moveX, m_moveY);
-
-    if (m_health >= m_initialHealth) {
-        // No need to position our health bar continuously, if it's not visible.
-        return;
-    }
-
-    const sf::Vector2f position = getPosition();
-    m_backGroundHealthbar.setPosition(position.x - 100, position.y + 20.f);
-    m_foreGroundHealthbar.setPosition(position.x - 100, position.y + 20.f);
 }
 
 unsigned int Enemy::getPathingIndex() {
@@ -152,6 +147,14 @@ void Enemy::setGoalHandler(Enemy::EnemyGoalHandler handler) {
     m_goalHandler = std::move(handler);
 }
 
-void Enemy::kill() {
+void Enemy::reachGoal() {
     m_goalHandler(shared_from_this());
+}
+
+void Enemy::setEnemyDeadHandler(Enemy::EnemyDeadHandler handler) {
+    m_enemyDeadHandler = std::move(handler);
+}
+
+void Enemy::kill() {
+    m_enemyDeadHandler(shared_from_this());
 }

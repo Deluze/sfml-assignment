@@ -2,7 +2,7 @@
 #define SFMLTEST_ENEMY_HPP
 
 #define HEALTH_BAR_LENGTH 35
-#define HEALTH_BAR_HEIGHT 1
+#define HEALTH_BAR_HEIGHT 2
 
 #include "../gameObject.hpp"
 #include "enemyType.hpp"
@@ -19,6 +19,7 @@ class Enemy : public GameObject, public std::enable_shared_from_this<Enemy> {
 public:
     using Ptr = std::shared_ptr<Enemy>;
     using EnemyGoalHandler = std::function<void(const Enemy::Ptr&)>;
+    using EnemyDeadHandler = std::function<void(const Enemy::Ptr&)>;
 
     explicit Enemy(unsigned int health, EnemyType type = EnemyType::GroundEnemy, bool isBoss = false);
 
@@ -26,9 +27,13 @@ public:
 
     void setGoalHandler(EnemyGoalHandler handler);
 
-    void step();
+    void setEnemyDeadHandler(EnemyDeadHandler handler);
 
     void kill();
+
+    void step();
+
+    void reachGoal();
 
     void setDirection(Direction direction, sf::Vector2<float> targetPosition);
 
@@ -94,6 +99,9 @@ private:
 
     // callback when enemy reaches end of path
     EnemyGoalHandler m_goalHandler;
+
+    // callback when enemy gets killed by tower
+    EnemyDeadHandler m_enemyDeadHandler;
 };
 
 
