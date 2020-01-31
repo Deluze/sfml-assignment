@@ -170,9 +170,6 @@ void Game::spawnEnemies() {
 void Game::spawnEnemy(const Enemy::Ptr &enemy) {
     m_enemyManager.addEnemy(enemy);
 
-    // https://stackoverflow.com/a/40259331
-//    float distance = hypot((mouseX - circle.getPosition().x), (mouseY - circle.getPosition().y));
-
     const sf::Vector2i spawnLocation = m_grid.getEnemySpawnTileCoordinate();
     const sf::Vector2f windowPosition = m_grid.getTileWindowPositionFromTileCoordinate(spawnLocation);
 

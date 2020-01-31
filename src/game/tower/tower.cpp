@@ -76,6 +76,7 @@ Enemy::Ptr Tower::getLockOn() {
 }
 
 bool Tower::isInRange(const Enemy::Ptr &enemy) {
+    // https://stackoverflow.com/a/40259331
     // also have to take the radius shape hit box thing in consideration..
     // because, again we didn't work with origins :(
     float distance = std::hypot((enemy->getPosition().x - getPosition().x - m_radiusShape.getPosition().x),
