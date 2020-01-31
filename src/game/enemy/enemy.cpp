@@ -111,22 +111,36 @@ void Enemy::setDirection(Direction direction, sf::Vector2<float> targetPosition)
         m_moveX = 0.f;
         m_moveY = -1.f;
 
+        m_sprite.setRotation(180);
+
         return;
     }
 
     if (direction == Direction::East) {
         m_moveX = 1.f;
         m_moveY = 0.f;
+
+        m_sprite.setRotation(270);
+
+        return;
     }
 
     if (direction == Direction::South) {
         m_moveX = 0.f;
         m_moveY = 1.f;
+
+        m_sprite.setRotation(0);
+
+        return;
     }
 
     if (direction == Direction::West) {
         m_moveX = -1.f;
         m_moveY = 0.f;
+
+        m_sprite.setRotation(90);
+
+        return;
     }
 }
 

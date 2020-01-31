@@ -71,9 +71,6 @@ Grid *Game::getGrid() {
 }
 
 void Game::handleTileClick(const Tile::Ptr &tile) {
-
-    spawnEnemy(std::make_shared<Enemy>(100, EnemyType::GroundEnemy));
-
     // If it's not buildable. Means that there are no turrets on here.
     // There's nothing to do here, let's leave.
     if (!tile->isBuildable()) {

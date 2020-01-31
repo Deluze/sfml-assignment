@@ -2,7 +2,7 @@
 #define SFMLTEST_WAVEMANAGER_HPP
 
 #define WAVE_COOLDOWN 60
-#define ADDITIONAL_ENEMY_A_WAVE 5
+#define ADDITIONAL_ENEMY_A_WAVE 3
 
 #include "wave.hpp"
 
@@ -18,8 +18,6 @@ public:
 
     Wave *getCurrentWave();
 
-    Wave *getNextWave();
-
     void setCurrentWaveNo(unsigned int wave);
 
     void forceWave();
@@ -31,7 +29,6 @@ private:
     unsigned int m_waveNo;
 
     Wave m_currentWave;
-    Wave m_nextWave;
 };
 
 

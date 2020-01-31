@@ -4,7 +4,7 @@ void EnemyManager::initialize() {
     m_enemyTextureAtlas.loadFromFile("asset/texture/enemies.png");
 
     m_enemyTexCoords[EnemyType::GroundEnemy] = {0, 0, 35, 35};
-    m_enemyTexCoords[EnemyType::AirEnemy] = {35, 0, 35, 35};
+    m_enemyTexCoords[EnemyType::AirEnemy] = {36, 0, 35, 35};
 }
 
 void EnemyManager::removeEnemy(const Enemy::Ptr &enemy) {
