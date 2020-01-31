@@ -85,6 +85,10 @@ void GameScene::onGUI(Engine *engine) {
     m_nextWaveText.setFont(m_font);
     m_remainingTimeUntilNextWaveText.setFont(m_font);
     m_remainingEnemiesCountText.setFont(m_font);
+    m_electricTowerName.setFont(m_font);
+    m_electricTowerGoldText.setFont(m_font);
+    m_bombTowerGoldText.setFont(m_font);
+    m_bombTowerName.setFont(m_font);
 
     m_healthTexture.loadFromFile("asset/sprite/heart.png");
     m_healthSprite.setTexture(m_healthTexture);
@@ -129,6 +133,29 @@ void GameScene::onGUI(Engine *engine) {
 
     m_remainingEnemiesCountText.setCharacterSize(13);
     m_remainingEnemiesCountText.setPosition(600.f, 10.f);
+
+
+    // ------ shop ------
+
+    m_electricTowerName.setString("Electric");
+    m_electricTowerGoldText.setString("100");
+
+    m_electricTowerItem = createElement<ShopItem>(TowerType::ElectricityTower, m_electricTowerName, m_electricTowerGoldText);
+    m_electricTowerItem.setPosition(0.f, 680.f);
+    m_electricTowerItem.bindClick([this](){
+        m_game.selectTower(m_electricTowerItem.getTower());
+    });
+    registerElement(&m_electricTowerItem);
+
+    m_bombTowerName.setString("Bomb");
+    m_bombTowerGoldText.setString("100");
+
+    m_bombTowerItem = createElement<ShopItem>(TowerType::BombTower, m_bombTowerName, m_bombTowerGoldText);
+    m_bombTowerItem.setPosition(120.f, 680.f);
+    m_bombTowerItem.bindClick([this]() {
+        m_game.selectTower(m_bombTowerItem.getTower());
+    });
+    registerElement(&m_bombTowerItem);
 }
 
 void GameScene::draw(sf::RenderWindow &window) const {
@@ -143,5 +170,7 @@ void GameScene::draw(sf::RenderWindow &window) const {
     window.draw(m_remainingTimeUntilNextWaveText);
     window.draw(m_remainingEnemiesCountText);
     window.draw(m_nextWaveButton);
+    window.draw(m_electricTowerItem);
+    window.draw(m_bombTowerItem);
     window.draw(m_game);
 }

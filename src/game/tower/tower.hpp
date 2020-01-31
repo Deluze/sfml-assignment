@@ -34,6 +34,10 @@ public:
 
     void shoot();
 
+    void build();
+
+    bool isBuilt();
+
     bool isInRange(const Enemy::Ptr& enemy);
 
     unsigned int getRange();
@@ -47,6 +51,9 @@ public:
     void setTexture(const sf::Texture &texture, sf::Rect<int> textureCoords);
 
 private:
+
+    bool m_isBuilt;
+
     // The range of the tower
     // this will be the radius of a circle
     unsigned int m_range;

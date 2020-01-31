@@ -45,6 +45,8 @@ public:
 
     Grid *getGrid();
 
+    void selectTower(const Tower::Ptr& tower);
+
     void handleTileClick(const Tile::Ptr &tile);
 
     void deselectTower();

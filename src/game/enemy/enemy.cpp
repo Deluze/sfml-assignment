@@ -3,8 +3,9 @@
 #include <cmath>
 #include <utility>
 
-Enemy::Enemy(unsigned int health, EnemyType type, bool isBoss)
-        : GameObject(), m_type(type), m_health(health), m_isBoss(isBoss), m_progress(0), m_pathingIndex(0),
+Enemy::Enemy(unsigned int health, EnemyType type, unsigned int goldWorth, bool isBoss)
+        : GameObject(), m_type(type), m_health(health), m_goldWorth(goldWorth), m_isBoss(isBoss), m_progress(0),
+          m_pathingIndex(0),
           m_moveX(0.f), m_moveY(0.f), m_distance(0.f) {
     m_initialHealth = health;
 
@@ -157,4 +158,8 @@ void Enemy::setEnemyDeadHandler(Enemy::EnemyDeadHandler handler) {
 
 void Enemy::kill() {
     m_enemyDeadHandler(shared_from_this());
+}
+
+unsigned int Enemy::getGoldWorth() {
+    return m_goldWorth;
 }

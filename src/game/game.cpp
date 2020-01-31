@@ -75,19 +75,28 @@ Grid *Game::getGrid() {
 
 void Game::handleTileClick(const Tile::Ptr &tile) {
 
-    // TODO: Remove following line
-    if (hasTowerSelected()) {
-        deselectTower();
+    if(hasTowerSelected()) {
+        getSelectedTower()->setSelected(false);
     }
 
     // we have nothing to do here
     if (!tile->isBuildable()) {
+        m_currentSelectedTower.reset();
         return;
     }
 
-    m_currentSelectedTower = std::make_shared<Tower>(TowerType::ElectricityTower);
+//    m_currentSelectedTower = std::make_shared<Tower>(TowerType::ElectricityTower);
 
-    if (!tile->hasTower() && hasTowerSelected()) {
+    if (!tile->hasTower() && hasTowerSelected() && !m_currentSelectedTower->isBuilt()) {
+
+        // for now let each tower cost a 100
+        if (getGold() < 100) {
+            m_currentSelectedTower.reset();
+            return;
+        }
+
+        substractGold(100);
+
         tile->setTower(m_currentSelectedTower);
         m_towerManager.addTower(m_currentSelectedTower);
 
@@ -96,6 +105,8 @@ void Game::handleTileClick(const Tile::Ptr &tile) {
         sf::Vector2<float> towerPosition = m_grid.getTileWindowPosition(tile);
         m_currentSelectedTower->setPosition(towerPosition.x, towerPosition.y - (70 - TILE_SIZE));
         m_currentSelectedTower->setSelected(true);
+        m_currentSelectedTower->build();
+
         return;
     }
 
@@ -198,4 +209,10 @@ void Game::deselectTower() {
 
 void Game::onEnemyKilled(const Enemy::Ptr &enemy) {
     m_enemyManager.removeEnemy(enemy);
+
+    addGold(m_waveManager.getCurrentWaveNo() * 5 + 5);
+}
+
+void Game::selectTower(const Tower::Ptr &tower) {
+    m_currentSelectedTower = tower;
 }

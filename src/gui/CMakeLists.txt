@@ -8,3 +8,4 @@ target_sources(SFMLTest PRIVATE
 )
 
 add_subdirectory(exception)
+add_subdirectory(game)

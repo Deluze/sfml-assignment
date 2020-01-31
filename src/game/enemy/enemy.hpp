@@ -21,7 +21,7 @@ public:
     using EnemyGoalHandler = std::function<void(const Enemy::Ptr&)>;
     using EnemyDeadHandler = std::function<void(const Enemy::Ptr&)>;
 
-    explicit Enemy(unsigned int health, EnemyType type = EnemyType::GroundEnemy, bool isBoss = false);
+    explicit Enemy(unsigned int health, EnemyType type = EnemyType::GroundEnemy, unsigned int goldWorth = 10, bool isBoss = false);
 
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
@@ -42,6 +42,8 @@ public:
     bool needsNewPath();
 
     void takeDamage(unsigned int damage);
+
+    unsigned int getGoldWorth();
 
     bool isGrounded();
 
@@ -94,8 +96,7 @@ private:
     // until it needs to request a new path.
     float m_distance;
 
-    // Target the enemy is currently walking towards
-    sf::Vector2<float> m_target;
+    unsigned int m_goldWorth;
 
     // callback when enemy reaches end of path
     EnemyGoalHandler m_goalHandler;

@@ -5,6 +5,7 @@
 #include "../game/game.hpp"
 #include "../gui/button.hpp"
 #include "../engine.hpp"
+#include "../gui/game/shopItem.hpp"
 
 #include <string>
 #include <memory>
@@ -57,6 +58,15 @@ private:
     std::string m_levelName;
 
     Game m_game;
+
+    // separated for shop
+    ShopItem m_electricTowerItem;
+    sf::Text m_electricTowerName;
+    sf::Text m_electricTowerGoldText;
+
+    ShopItem m_bombTowerItem;
+    sf::Text m_bombTowerName;
+    sf::Text m_bombTowerGoldText;
 };
 
 

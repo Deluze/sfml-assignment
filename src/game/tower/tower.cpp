@@ -4,14 +4,14 @@
 #include <cmath>
 #include <utility>
 
-Tower::Tower(TowerType towerType) : m_type(towerType), m_range(2), m_damage(5), m_fireRate(500), m_selected(false) {
+Tower::Tower(TowerType towerType) : m_type(towerType), m_range(2), m_damage(5), m_fireRate(500), m_selected(false), m_isBuilt(false) {
     m_radiusShape.setFillColor(sf::Color{235, 79, 52, 128});
 }
 
 void Tower::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     states.transform *= getTransform();
 
-    if (m_selected) {
+    if (m_selected || !m_isBuilt) {
         target.draw(m_radiusShape, states);
     }
 
@@ -87,4 +87,12 @@ void Tower::shoot() {
             m_lastShot.restart();
         }
     }
+}
+
+void Tower::build() {
+    m_isBuilt = true;
+}
+
+bool Tower::isBuilt() {
+    return m_isBuilt;
 }
