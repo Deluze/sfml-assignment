@@ -3,6 +3,7 @@
 
 #include "enemy.hpp"
 #include "../grid.hpp"
+#include "../tower/tower.hpp"
 
 #include <vector>
 #include <algorithm>
@@ -32,6 +33,8 @@ public:
     Enemy::Ptr getMostProgressedEnemy();
 
     void handleEnemyPathing(const Grid& grid);
+
+    void tryGetLockOn(const Tower::Ptr& tower);
 
 private:
 

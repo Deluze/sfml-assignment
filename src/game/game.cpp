@@ -10,6 +10,7 @@ Game::Game() : m_health(100), m_gold(1000) {
 void Game::tick() {
     m_enemyManager.tick();
     m_enemyManager.handleEnemyPathing(m_grid);
+    m_towerManager.handleEnemyLockOn(&m_enemyManager);
     spawnEnemies();
 }
 
@@ -90,7 +91,7 @@ void Game::handleTileClick(const Tile::Ptr &tile) {
 
         // Since the tower is bigger than the actual tile. A tower equals to 70 pixels on the Y axis. Time to substract that
         // So it actually looks that the tower is on the tile.
-        sf::Vector2f towerPosition = m_grid.getTileWindowPosition(tile);
+        sf::Vector2<float> towerPosition = m_grid.getTileWindowPosition(tile);
         m_currentSelectedTower->setPosition(towerPosition.x, towerPosition.y - (70 - TILE_SIZE));
         m_currentSelectedTower->setSelected(true);
         return;

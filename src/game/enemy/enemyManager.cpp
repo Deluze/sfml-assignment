@@ -75,4 +75,20 @@ void EnemyManager::cleanUp() {
     m_enemiesToCleanUp.clear();
 }
 
+void EnemyManager::tryGetLockOn(const Tower::Ptr &tower) {
+    if (tower->hasLockOn()) {
+        return;
+    }
+
+    auto it = std::find_if(m_enemies.begin(), m_enemies.end(), [tower](const Enemy::Ptr& enemy) {
+        return tower->isInRange(enemy);
+    });
+
+    if (it == m_enemies.end()) {
+        return;
+    }
+
+    tower->lockOn(*it);
+}
+
 

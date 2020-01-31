@@ -24,7 +24,15 @@ public:
 
     void setSelected(bool selected);
 
+    bool hasLockOn();
+
+    void validateLockOn();
+
+    Enemy::Ptr getLockOn();
+
     void lockOn(std::weak_ptr<Enemy> enemy);
+
+    bool isInRange(const Enemy::Ptr& enemy);
 
     unsigned int getRange();
 

@@ -1,14 +1,12 @@
 #include "tower.hpp"
 #include "../grid.hpp"
 
+#include <cmath>
 #include <utility>
 
 
 Tower::Tower(TowerType towerType) : m_type(towerType), m_range(2), m_damage(0), m_fireRate(0), m_selected(false) {
     m_radiusShape.setFillColor(sf::Color{235, 79, 52, 128});
-//    m_radiusShape.setPosition(10, 10);
-//    m_radiusShape.setPointCount(5);
-
 }
 
 void Tower::draw(sf::RenderTarget &target, sf::RenderStates states) const {
@@ -52,4 +50,36 @@ void Tower::setSelected(bool selected) {
     m_radiusShape.setPosition(TILE_SIZE / 2.f, TILE_SIZE / 2.f + 75 - TILE_SIZE);
     m_radiusShape.setRadius(static_cast<float>(m_range * TILE_SIZE));
     m_radiusShape.setOrigin(m_radiusShape.getRadius(), m_radiusShape.getRadius());
+}
+
+bool Tower::hasLockOn() {
+    return !m_focussedEnemy.expired();
+}
+
+void Tower::validateLockOn() {
+    // this function will be used
+    // to check if the enemy is still in range
+    // of this towers radius.
+    // if not, deselect the current focused enemy.
+
+    if (!hasLockOn()) {
+        return;
+    }
+
+    if (!isInRange(getLockOn())) {
+        m_focussedEnemy.reset();
+    }
+}
+
+Enemy::Ptr Tower::getLockOn() {
+    return m_focussedEnemy.lock();
+}
+
+bool Tower::isInRange(const Enemy::Ptr &enemy) {
+    // also have to take the radius shape hit box thing in consideration..
+    // because, again we didn't work with origins :(
+    float distance = std::hypot((enemy->getPosition().x - getPosition().x - m_radiusShape.getPosition().x),
+                                (enemy->getPosition().y - getPosition().y - m_radiusShape.getPosition().y));
+
+    return distance <= static_cast<float>(getRange() * TILE_SIZE);
 }

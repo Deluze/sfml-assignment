@@ -3,6 +3,7 @@
 
 #include "tower.hpp"
 #include "towerType.hpp"
+#include "../enemy/enemyManager.hpp"
 
 #include <vector>
 #include <unordered_map>
@@ -23,7 +24,9 @@ public:
 
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
+    void handleEnemyLockOn(EnemyManager* enemyManager);
 private:
+
     std::vector<Tower::Ptr> m_towers;
     std::unordered_map<TowerType, sf::Rect<int>> m_towerTexCoords;
     sf::Texture m_towersTexture;
