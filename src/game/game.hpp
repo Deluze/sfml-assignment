@@ -48,8 +48,6 @@ public:
 
     bool hasTowerSelected();
 
-    void handleEnemyPathRequest(const Enemy::Ptr& enemy);
-
     Tower::Ptr getSelectedTower();
 
     TowerManager *getTowerManager();

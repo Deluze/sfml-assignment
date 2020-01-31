@@ -29,7 +29,7 @@ public:
 
 private:
 
-    void loop();
+    void startLoop();
 
     sf::RenderWindow m_window;
     std::string m_name;

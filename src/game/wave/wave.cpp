@@ -7,7 +7,7 @@ Wave::Wave(unsigned int enemyCount, unsigned int enemySpawnInterval) : m_enemyCo
 }
 
 unsigned int Wave::getEnemyCount() {
-    return m_enemyCount;
+    return m_enemyCount - m_enemiesSpawned;
 }
 
 unsigned int Wave::getEnemySpawnInterval() {

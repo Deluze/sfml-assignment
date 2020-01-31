@@ -6,5 +6,4 @@ target_sources(SFMLTest PRIVATE
         ${PATH}/enemyManager.hpp
         ${PATH}/enemyManager.cpp
         ${PATH}/enemyType.hpp
-        ${PATH}/enemyDirection.hpp
 )

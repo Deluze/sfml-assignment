@@ -6,13 +6,14 @@
 
 #include "../gameObject.hpp"
 #include "enemyType.hpp"
-#include "enemyDirection.hpp"
+#include "../direction.hpp"
 
 #include <memory>
 #include <functional>
 
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
+#include <SFML/System/Vector2.hpp>
 
 class Enemy : public GameObject {
 public:
@@ -24,7 +25,11 @@ public:
 
     void step();
 
+    void setDirection(Direction direction, sf::Vector2<float> targetPosition);
+
     void setTexture(const sf::Texture &texture, const sf::Rect<int> &texCoords);
+
+    bool needsNewPath();
 
     void takeDamage(unsigned int damage);
 
@@ -74,6 +79,13 @@ private:
 
     // The amount of Y this enemy has to move each tick
     float m_moveY;
+
+    // The amount of distance the enemy needs to cover
+    // until it needs to request a new path.
+    float m_distance;
+
+    // Target the enemy is currently walking towards
+    sf::Vector2<float> m_target;
 };
 
 

@@ -10,6 +10,8 @@ Game::Game() : m_health(100), m_gold(1000) {
 
 void Game::tick() {
     m_enemyManager.tick();
+    m_enemyManager.handleEnemyPathing(m_grid);
+    spawnEnemies();
 }
 
 void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const {
@@ -89,7 +91,7 @@ void Game::handleTileClick(const Tile::Ptr &tile) {
 
     m_currentSelectedTower = std::make_shared<Tower>(TowerType::ElectricityTower);
 
-    if (!tile->hasTower() && m_currentSelectedTower != nullptr) {
+    if (!tile->hasTower() && hasTowerSelected()) {
         tile->setTower(m_currentSelectedTower);
         m_towerManager.addTower(m_currentSelectedTower);
 
@@ -129,7 +131,8 @@ void Game::spawnEnemies() {
     Wave *wave = m_waveManager.getCurrentWave();
     const unsigned int spawnInterval = wave->getEnemySpawnInterval();
 
-    if (m_lastEnemySpawned.getElapsedTime().asMilliseconds() >= spawnInterval) {
+    if (m_lastEnemySpawned.getElapsedTime().asMilliseconds() >= spawnInterval && wave->getEnemyCount() > 0) {
+        wave->enemyGotSpawned();
         m_lastEnemySpawned.restart();
 
         // other wave will just be a regular ground enemies
@@ -138,12 +141,12 @@ void Game::spawnEnemies() {
 
         EnemyType enemyType = EnemyType::GroundEnemy;
 
-        if(m_waveManager.getCurrentWaveNo() % 3 == 0) {
+        if (m_waveManager.getCurrentWaveNo() % 3 == 0) {
             // flying wave, spawn flying enemy
             enemyType = EnemyType::AirEnemy;
         }
 
-        if(m_waveManager.getCurrentWaveNo() % 10 == 0) {
+        if (m_waveManager.getCurrentWaveNo() % 10 == 0) {
             // boss wave, spawn random enemies, with a boss.
             // we mod it by 2, because we only have 2 enemy types (for now)
             enemyType = rand() % 2 == 0 ? EnemyType::GroundEnemy : EnemyType::AirEnemy;
@@ -154,12 +157,11 @@ void Game::spawnEnemies() {
     }
 }
 
-void Game::spawnEnemy(const Enemy::Ptr& enemy) {
+void Game::spawnEnemy(const Enemy::Ptr &enemy) {
     m_enemyManager.addEnemy(enemy);
 
     const sf::Vector2i spawnLocation = m_grid.getEnemySpawnTileCoordinate();
-    const Tile::Ptr tile = m_grid.getTileFromCoordinate(spawnLocation);
-    const sf::Vector2f windowPosition = m_grid.getTileWindowPosition(tile);
+    const sf::Vector2f windowPosition = m_grid.getTileWindowPositionFromTileCoordinate(spawnLocation);
 
     // we know that our enemy has a width of 35, and the tiles a width of 50.
     // 50 - 35 = 15 space left, divide that by 2, and we get a 7.5
@@ -168,8 +170,4 @@ void Game::spawnEnemy(const Enemy::Ptr& enemy) {
     // We need to center our spawned enemy in the center of the tile.
     // And we always do these calculations relative to the top left side of the tile
     enemy->setPosition(windowPosition.x + 25.f, windowPosition.y + 25.f);
-}
-
-void Game::handleEnemyPathRequest(const Enemy::Ptr &enemy) {
-
 }

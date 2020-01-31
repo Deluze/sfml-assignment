@@ -38,4 +38,20 @@ std::size_t EnemyManager::getEnemyCount() {
     return m_enemies.size();
 }
 
+void EnemyManager::handleEnemyPathing(const Grid &grid) {
+    for (const auto &enemy : m_enemies) {
+        if (!enemy->needsNewPath()) {
+            continue;
+        }
+
+        const sf::Vector2<int> targetTileCoordinate = grid.getEnemyPathTileCoordinate(enemy->getPathingIndex() + 1);
+        const sf::Vector2<float> targetPosition = grid.getTileWindowPositionFromTileCoordinate(targetTileCoordinate);
+
+        // to align stuff, we need to add 25 to x and y of the tile target position (since it's origin is in the left top)
+        const Direction direction = grid.determineDirection(enemy->getPosition(), {targetPosition.x + 25.f, targetPosition.y + 25.f});
+
+        enemy->setDirection(direction, {targetPosition.x + 25.f, targetPosition.y + 25.f});
+    }
+}
+
 

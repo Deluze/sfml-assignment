@@ -7,6 +7,7 @@ target_sources(SFMLTest PRIVATE
         ${PATH}/grid.cpp
         ${PATH}/game.cpp
         ${PATH}/game.hpp
+        ${PATH}/direction.hpp
 )
 
 add_subdirectory(tile)

@@ -1,12 +1,10 @@
 #include "engine.hpp"
 
-#include <SFML/Graphics/CircleShape.hpp>
-
 int main() {
-    auto engine = new Engine("My Engine :)");
+    Engine engine{"My Engine :)"};
 
-    engine->initialize();
-    engine->start();
+    engine.initialize();
+    engine.start();
 
     return 0;
 }

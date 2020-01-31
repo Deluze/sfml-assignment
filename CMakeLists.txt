@@ -29,5 +29,4 @@ if (WIN32)
     )
 endif ()
 
-
 target_link_libraries(SFMLTest sfml-graphics sfml-window sfml-system)

@@ -29,7 +29,7 @@ public:
     // Callback for making drawings to the screen.
     virtual void draw(sf::RenderWindow &window) const;
 
-    // Callback before an actual update or draw loop will happen.
+    // Callback before an actual update or draw startLoop will happen.
     virtual void onEnter(Engine *engine);
 
     // Callback just before this scene will get destroyed by the manager.

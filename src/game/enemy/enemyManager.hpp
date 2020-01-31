@@ -2,6 +2,7 @@
 #define SFMLTEST_ENEMYMANAGER_HPP
 
 #include "enemy.hpp"
+#include "../grid.hpp"
 
 #include <vector>
 #include <algorithm>
@@ -29,6 +30,8 @@ public:
 
     // Gets the enemy which is most advanced.
     Enemy::Ptr getMostProgressedEnemy();
+
+    void handleEnemyPathing(const Grid& grid);
 
 private:
     std::vector<Enemy::Ptr> m_enemies;

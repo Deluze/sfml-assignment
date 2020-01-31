@@ -6,6 +6,7 @@
 #define LEVEL_HEIGHT 10
 
 #include "tile/tile.hpp"
+#include "direction.hpp"
 
 #include <array>
 #include <vector>
@@ -29,19 +30,23 @@ public:
 
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
-    Tile::Ptr getTileFromMouse(sf::Vector2i vector);
+    Tile::Ptr getTileFromMouse(sf::Vector2i vector) const;
 
-    Tile::Ptr getTileFromPosition(sf::Vector2f vector);
+    Tile::Ptr getTileFromPosition(sf::Vector2f vector) const;
 
-    Tile::Ptr getTileFromCoordinate(sf::Vector2i vector);
+    Tile::Ptr getTileFromCoordinate(sf::Vector2i vector) const;
 
-    sf::Vector2f getTileWindowPosition(const Tile::Ptr &tile);
+    sf::Vector2<float> getTileWindowPosition(const Tile::Ptr &tile) const;
 
-    sf::Vector2i getEnemySpawnTileCoordinate();
+    sf::Vector2<int> getEnemySpawnTileCoordinate() const;
 
-    sf::Vector2i getEnemyTargetTileCoordinate();
+    sf::Vector2<int> getEnemyTargetTileCoordinate() const;
 
-    sf::Vector2i getEnemyPathTileCoordinate(unsigned int pathIndex);
+    sf::Vector2<int> getEnemyPathTileCoordinate(unsigned int pathIndex) const;
+
+    sf::Vector2<float> getTileWindowPositionFromTileCoordinate(sf::Vector2<int> coordinate) const;
+
+    Direction determineDirection(sf::Vector2<float> currentPosition, sf::Vector2<float> targetPosition) const;
 
 private:
     tileContainer m_tiles;

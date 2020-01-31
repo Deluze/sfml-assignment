@@ -1,8 +1,6 @@
 #include "engine.hpp"
 #include "scene/mainMenuScene.hpp"
 
-#include <iostream>
-
 Engine::Engine(const char *name) : m_name(name), m_running(false) {
 
 }
@@ -23,7 +21,7 @@ void Engine::start() {
 
     m_running = true;
 
-    loop();
+    startLoop();
 }
 
 
@@ -31,14 +29,14 @@ void Engine::stop() {
     m_running = false;
 }
 
-void Engine::loop() {
+void Engine::startLoop() {
     sf::Clock clock;
-    sf::Uint32 lastFrame;
-    sf::Uint32 catchedUpFrames{0};
-    constexpr sf::Uint32 timeBetweenFixedUpdated = 1000 / DELTA_TICKS;
+    unsigned int lastFrame;
+    unsigned int catchedUpFrames{0};
+    constexpr unsigned int timeBetweenFixedUpdated = 1000 / DELTA_TICKS;
 
     /**
-     * Main thread loop. Used for UI/Events
+     * Main thread startLoop. Used for UI/Events
      */
     while (m_running) {
         //Engine logic
