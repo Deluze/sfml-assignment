@@ -52,5 +52,4 @@ void Tower::setSelected(bool selected) {
     m_radiusShape.setPosition(TILE_SIZE / 2.f, TILE_SIZE / 2.f + 75 - TILE_SIZE);
     m_radiusShape.setRadius(static_cast<float>(m_range * TILE_SIZE));
     m_radiusShape.setOrigin(m_radiusShape.getRadius(), m_radiusShape.getRadius());
-//    m_radiusShape.setOutlineColor(sf::Color::Cyan);
 }
