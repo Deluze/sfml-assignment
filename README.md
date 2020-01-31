@@ -25,14 +25,14 @@ The game is comparable to some known tower defense games out there.
 ```
 
 
-## Installation instructions
+# Installation instructions
 
 ### Pre-requisites:
 [CMake](https://cmake.org/) has to be installed
 
-[vcpkg](https://github.com/microsoft/vcpkg) has to be instaled (user wide integration setup OR `VCPKG_ROOT` environment variable set)
+[vcpkg](https://github.com/microsoft/vcpkg) has to be installed (user wide integration setup OR `VCPKG_ROOT` environment variable set)
 
-### Windows:
+## Windows:
 
 ```bash
     git pull https://github.com/deluze/sfml-assignment
@@ -45,7 +45,7 @@ The game is comparable to some known tower defense games out there.
 
 and you can now open up the solution file.
 
-### Linux:
+## Linux:
 
 ```bash
     git pull https://github.com/deluze/sfml-assignment
@@ -54,11 +54,17 @@ and you can now open up the solution file.
     mkdir build
     cd build
     cmake ..
+```
+
+if you want to compile your code use
+
+```bash
     cmake --build .
 ```
 
+in the cmake target directory
 
-### Sources
+## Sources
 
 [CMakeSettings](https://docs.microsoft.com/en-us/cpp/build/cmakesettings-reference?view=vs-2019)
 : for making builds for windows easy
