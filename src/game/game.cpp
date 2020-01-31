@@ -71,17 +71,14 @@ Grid *Game::getGrid() {
 }
 
 void Game::handleTileClick(const Tile::Ptr &tile) {
-    // If it's not buildable. Means that there are no turrets on here.
-    // There's nothing to do here, let's leave.
-    if (!tile->isBuildable()) {
-        return;
+
+    // TODO: Remove following line
+    if (hasTowerSelected()) {
+        deselectTower();
     }
 
-    // Seems like there already is a tower built on this spot.
-    // We might want to upgrade this tower.
-    // Select the tower and open the upgrade
-    if (tile->hasTower()) {
-        m_currentSelectedTower = tile->getTower();
+    // we have nothing to do here
+    if (!tile->isBuildable()) {
         return;
     }
 
@@ -95,6 +92,22 @@ void Game::handleTileClick(const Tile::Ptr &tile) {
         // So it actually looks that the tower is on the tile.
         sf::Vector2f towerPosition = m_grid.getTileWindowPosition(tile);
         m_currentSelectedTower->setPosition(towerPosition.x, towerPosition.y - (70 - TILE_SIZE));
+        m_currentSelectedTower->setSelected(true);
+        return;
+    }
+
+    // Seems like there already is a tower built on this spot.
+    // We might want to upgrade this tower.
+    // Select the tower and open the upgrade
+    if (tile->hasTower()) {
+
+        if (hasTowerSelected()) {
+            deselectTower();
+        }
+
+        m_currentSelectedTower = tile->getTower();
+        m_currentSelectedTower->setSelected(true);
+        return;
     }
 }
 
@@ -156,6 +169,9 @@ void Game::spawnEnemies() {
 void Game::spawnEnemy(const Enemy::Ptr &enemy) {
     m_enemyManager.addEnemy(enemy);
 
+    // https://stackoverflow.com/a/40259331
+//    float distance = hypot((mouseX - circle.getPosition().x), (mouseY - circle.getPosition().y));
+
     const sf::Vector2i spawnLocation = m_grid.getEnemySpawnTileCoordinate();
     const sf::Vector2f windowPosition = m_grid.getTileWindowPositionFromTileCoordinate(spawnLocation);
 
@@ -172,4 +188,9 @@ void Game::spawnEnemy(const Enemy::Ptr &enemy) {
 void Game::onEnemyDestination(const Enemy::Ptr &enemy) {
     substractHealth(1);
     m_enemyManager.removeEnemy(enemy);
+}
+
+void Game::deselectTower() {
+    m_currentSelectedTower->setSelected(false);
+    m_currentSelectedTower.reset();
 }

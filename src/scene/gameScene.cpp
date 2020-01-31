@@ -12,7 +12,7 @@ GameScene::GameScene(std::string levelName)
 void GameScene::fixedUpdate(Engine *engine, EventBag *events) {
     m_game.tick();
 
-    if(m_game.getWaveManager()->getWaveCooldown() == 0) {
+    if (m_game.getWaveManager()->getWaveCooldown() == 0) {
         m_game.nextWave();
     }
 
@@ -29,6 +29,10 @@ void GameScene::update(Engine *engine, EventBag *events) {
                 // we found a tile, no need to look for any other GUI clicks.
                 events->take(sf::Event::EventType::MouseButtonReleased);
                 m_game.handleTileClick(tile);
+            } else {
+                if (m_game.hasTowerSelected()) {
+                    m_game.deselectTower();
+                }
             }
         }
     }
@@ -117,7 +121,7 @@ void GameScene::onGUI(Engine *engine) {
 
     m_nextWaveButton = createElement<Button>(m_nextWaveText, 100.f, 40.f);
     m_nextWaveButton.setPosition(700.f, 0.f);
-    m_nextWaveButton.bindClick([this](){m_game.nextWave();});
+    m_nextWaveButton.bindClick([this]() { m_game.nextWave(); });
     registerElement(&m_nextWaveButton);
 
     m_remainingTimeUntilNextWaveText.setPosition(675.f, 10.f);

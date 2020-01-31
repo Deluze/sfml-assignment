@@ -11,6 +11,8 @@
 
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
+#include <SFML/Graphics/CircleShape.hpp>
+#include <SFML/System/Clock.hpp>
 
 class Tower : public GameObject {
 public:
@@ -20,11 +22,15 @@ public:
 
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
-    sf::Uint8 getRange();
+    void setSelected(bool selected);
 
-    sf::Uint32 getDamage();
+    void lockOn(std::weak_ptr<Enemy> enemy);
 
-    sf::Uint16 getFireRate();
+    unsigned int getRange();
+
+    unsigned int getDamage();
+
+    unsigned int getFireRate();
 
     TowerType getTowerType();
 
@@ -32,21 +38,28 @@ public:
 
 private:
     // The range of the tower
-    // this will be the radius of a square
-    sf::Uint8 m_range;
+    // this will be the radius of a circle
+    unsigned int m_range;
 
     // Damage the tower will be doing
     // each shot
-    sf::Uint32 m_damage;
+    unsigned int m_damage;
 
     // FireTower rate of the tower, in milliseconds.
     // 1000 means 1 bullet a second
     // 500 means 2 bullets a second.. etc
-    sf::Uint16 m_fireRate;
+    unsigned int m_fireRate;
 
     // Sprite of the turret.
     // Texture and texture coords will be provider by tower manager
     sf::Sprite m_sprite;
+
+    // If this tower is selected, this will be rendered
+    sf::CircleShape m_radiusShape;
+
+    // if the tower is selected or not, if it's selected
+    // it will draw the radius around the tower
+    bool m_selected;
 
     // Type of tower
     TowerType m_type;
@@ -55,6 +68,9 @@ private:
 
     // Currently focused enemy
     std::weak_ptr<Enemy> m_focussedEnemy;
+
+    // Last time this tower shot
+    sf::Clock m_lastShot;
 };
 
 

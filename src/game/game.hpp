@@ -47,6 +47,8 @@ public:
 
     void handleTileClick(const Tile::Ptr &tile);
 
+    void deselectTower();
+
     bool hasTowerSelected();
 
     void onEnemyDestination(const Enemy::Ptr& enemy);
