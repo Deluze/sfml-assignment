@@ -73,13 +73,13 @@ void Grid::initialize() {
     }
 }
 
-Tile::Ptr Grid::getTileFromMouse(sf::Vector2i vector) const {
+Tile::Ptr Grid::getTileFromMouse(sf::Vector2<int> vector) const {
     return getTileFromPosition({static_cast<float>(vector.x), static_cast<float>(vector.y)});
 }
 
-Tile::Ptr Grid::getTileFromPosition(sf::Vector2f vector) const {
+Tile::Ptr Grid::getTileFromPosition(sf::Vector2<float> vector) const {
 
-    sf::Vector2f position = getPosition();
+    sf::Vector2<float> position = getPosition();
 
     const float xRelative = vector.x - position.x;
     const float yRelative = vector.y - position.y;
@@ -98,10 +98,10 @@ Tile::Ptr Grid::getTileFromPosition(sf::Vector2f vector) const {
     return m_tiles[col][row];
 }
 
-sf::Vector2f Grid::getTileWindowPosition(const Tile::Ptr &tile) const {
+sf::Vector2<float> Grid::getTileWindowPosition(const Tile::Ptr &tile) const {
     // This function is used, to calculate to find the position
     // on where to position the enemy and/or towers.
-    sf::Vector2f gridPosition = getPosition();
+    sf::Vector2<float> gridPosition = getPosition();
 
     const auto yRelative = static_cast<float>(tile->getY() * TILE_SIZE);
     const auto xRelative = static_cast<float>(tile->getX() * TILE_SIZE);
@@ -109,7 +109,7 @@ sf::Vector2f Grid::getTileWindowPosition(const Tile::Ptr &tile) const {
     return sf::Vector2f{gridPosition.x + xRelative, gridPosition.y + yRelative};
 }
 
-sf::Vector2i Grid::getEnemySpawnTileCoordinate() const {
+sf::Vector2<int> Grid::getEnemySpawnTileCoordinate() const {
     if (m_enemyPathingPoints.empty()) {
         throw std::logic_error("No enemy spawn point set");
     }
@@ -117,7 +117,7 @@ sf::Vector2i Grid::getEnemySpawnTileCoordinate() const {
     return *m_enemyPathingPoints.begin();
 }
 
-sf::Vector2i Grid::getEnemyTargetTileCoordinate() const {
+sf::Vector2<int> Grid::getEnemyTargetTileCoordinate() const {
     if (m_enemyPathingPoints.empty()) {
         throw std::logic_error("No enemy target point set");
     }
@@ -125,11 +125,16 @@ sf::Vector2i Grid::getEnemyTargetTileCoordinate() const {
     return *m_enemyPathingPoints.end();
 }
 
-sf::Vector2i Grid::getEnemyPathTileCoordinate(unsigned int pathIndex) const {
+sf::Vector2<int> Grid::getEnemyPathTileCoordinate(unsigned int pathIndex) const {
+
+    if(pathIndex >= m_enemyPathingPoints.size()) {
+        return m_enemyPathingPoints[m_enemyPathingPoints.size() - 1];
+    }
+
     return m_enemyPathingPoints[pathIndex];
 }
 
-Tile::Ptr Grid::getTileFromCoordinate(sf::Vector2i vector) const {
+Tile::Ptr Grid::getTileFromCoordinate(sf::Vector2<int> vector) const {
 
     if (vector.x >= m_tiles.size() || vector.y >= m_tiles[vector.x].size()) {
         return nullptr;

@@ -8,7 +8,9 @@ void EnemyManager::initialize() {
 }
 
 void EnemyManager::removeEnemy(const Enemy::Ptr &enemy) {
-    m_enemies.erase(std::remove(m_enemies.begin(), m_enemies.end(), enemy));
+    // we add the enemy to the queue,
+    // so we can remove it safely after everything is done :)
+    m_enemiesToCleanUp.push_back(enemy);
 }
 
 void EnemyManager::addEnemy(const Enemy::Ptr &enemy) {
@@ -32,6 +34,8 @@ void EnemyManager::tick() {
     for (const auto &enemy : m_enemies) {
         enemy->step();
     }
+
+    cleanUp();
 }
 
 std::size_t EnemyManager::getEnemyCount() {
@@ -44,14 +48,31 @@ void EnemyManager::handleEnemyPathing(const Grid &grid) {
             continue;
         }
 
+        // to align stuff, we need to add 25 to x and y of the tile target position (since it's origin is in the left top)
+        // needs to be changed at some point..
+
         const sf::Vector2<int> targetTileCoordinate = grid.getEnemyPathTileCoordinate(enemy->getPathingIndex() + 1);
         const sf::Vector2<float> targetPosition = grid.getTileWindowPositionFromTileCoordinate(targetTileCoordinate);
 
-        // to align stuff, we need to add 25 to x and y of the tile target position (since it's origin is in the left top)
-        const Direction direction = grid.determineDirection(enemy->getPosition(), {targetPosition.x + 25.f, targetPosition.y + 25.f});
+        if (sf::Vector2<float>({targetPosition.x + 25.f, targetPosition.y + 25.f}) == enemy->getPosition()) {
+            // enemy reached destination
+            enemy->kill();
+        }
+
+        const Direction direction = grid.determineDirection(enemy->getPosition(),
+                                                            {targetPosition.x + 25.f, targetPosition.y + 25.f});
 
         enemy->setDirection(direction, {targetPosition.x + 25.f, targetPosition.y + 25.f});
     }
+}
+
+void EnemyManager::cleanUp() {
+
+    m_enemies.erase(std::remove_if(m_enemies.begin(), m_enemies.end(), [this](const Enemy::Ptr &enemy) {
+        return std::find(m_enemiesToCleanUp.begin(), m_enemiesToCleanUp.end(), enemy) != m_enemiesToCleanUp.end();
+    }), m_enemies.end());
+
+    m_enemiesToCleanUp.clear();
 }
 
 

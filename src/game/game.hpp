@@ -8,6 +8,7 @@
 #include "enemy/enemyManager.hpp"
 
 #include <memory>
+#include <functional>
 
 #include <SFML/System/Clock.hpp>
 #include <SFML/System/NonCopyable.hpp>
@@ -24,21 +25,21 @@ public:
 
     void tick();
 
-    void addGold(sf::Uint32 amount);
+    void addGold(unsigned int amount);
 
-    void substractGold(sf::Uint32 amount);
+    void substractGold(unsigned int amount);
 
-    void setGold(sf::Uint32 amount);
+    void setGold(unsigned int amount);
 
-    sf::Uint32 getGold();
+    unsigned int getGold();
 
-    void addHealth(sf::Uint32 health);
+    void addHealth(unsigned int health);
 
-    void substractHealth(sf::Uint32 health);
+    void substractHealth(unsigned int health);
 
-    void setHealth(sf::Uint32 health);
+    void setHealth(unsigned int health);
 
-    sf::Uint32 getHealth();
+    unsigned int getHealth();
 
     void nextWave();
 
@@ -47,6 +48,10 @@ public:
     void handleTileClick(const Tile::Ptr &tile);
 
     bool hasTowerSelected();
+
+    void onEnemyDestination(const Enemy::Ptr& enemy);
+
+    void onEnemyKilled(const Enemy::Ptr& enemy);
 
     Tower::Ptr getSelectedTower();
 
@@ -63,8 +68,8 @@ private:
 
     void spawnEnemy(const Enemy::Ptr& enemy);
 
-    sf::Uint32 m_health;
-    sf::Uint32 m_gold;
+    unsigned int m_health;
+    unsigned int m_gold;
 
     Grid m_grid;
 

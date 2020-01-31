@@ -1,6 +1,7 @@
 #include "enemy.hpp"
 
 #include <cmath>
+#include <utility>
 
 Enemy::Enemy(unsigned int health, EnemyType type, bool isBoss)
         : GameObject(), m_type(type), m_health(health), m_isBoss(isBoss), m_progress(0), m_pathingIndex(0),
@@ -131,4 +132,12 @@ void Enemy::setDirection(Direction direction, sf::Vector2<float> targetPosition)
 
 bool Enemy::needsNewPath() {
     return m_distance <= 0.f;
+}
+
+void Enemy::setGoalHandler(Enemy::EnemyGoalHandler handler) {
+    m_goalHandler = std::move(handler);
+}
+
+void Enemy::kill() {
+    m_goalHandler(shared_from_this());
 }

@@ -1,5 +1,4 @@
 #include "game.hpp"
-#include <ctime>
 #include <functional>
 
 Game::Game() : m_health(100), m_gold(1000) {
@@ -25,11 +24,11 @@ void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     target.draw(m_towerManager, states);
 }
 
-void Game::addGold(sf::Uint32 amount) {
+void Game::addGold(unsigned int amount) {
     m_gold += amount;
 }
 
-void Game::substractGold(sf::Uint32 amount) {
+void Game::substractGold(unsigned int amount) {
     if (amount > m_gold) {
         m_gold = 0;
         return;
@@ -38,19 +37,19 @@ void Game::substractGold(sf::Uint32 amount) {
     m_gold -= amount;
 }
 
-void Game::setGold(sf::Uint32 amount) {
+void Game::setGold(unsigned int amount) {
     m_gold = amount;
 }
 
-sf::Uint32 Game::getGold() {
+unsigned int Game::getGold() {
     return m_gold;
 }
 
-void Game::addHealth(sf::Uint32 health) {
+void Game::addHealth(unsigned int health) {
     m_health += health;
 }
 
-void Game::substractHealth(sf::Uint32 health) {
+void Game::substractHealth(unsigned int health) {
     if (health > m_health) {
         m_health = 0;
         return;
@@ -59,11 +58,11 @@ void Game::substractHealth(sf::Uint32 health) {
     m_health -= health;
 }
 
-sf::Uint32 Game::getHealth() {
+unsigned int Game::getHealth() {
     return m_health;
 }
 
-void Game::setHealth(sf::Uint32 health) {
+void Game::setHealth(unsigned int health) {
     m_health = health;
 }
 
@@ -170,4 +169,10 @@ void Game::spawnEnemy(const Enemy::Ptr &enemy) {
     // We need to center our spawned enemy in the center of the tile.
     // And we always do these calculations relative to the top left side of the tile
     enemy->setPosition(windowPosition.x + 25.f, windowPosition.y + 25.f);
+    enemy->setGoalHandler(std::bind(&Game::onEnemyDestination, this, enemy));
+}
+
+void Game::onEnemyDestination(const Enemy::Ptr &enemy) {
+    substractHealth(1);
+    m_enemyManager.removeEnemy(enemy);
 }

@@ -30,11 +30,11 @@ public:
 
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
-    Tile::Ptr getTileFromMouse(sf::Vector2i vector) const;
+    Tile::Ptr getTileFromMouse(sf::Vector2<int> vector) const;
 
-    Tile::Ptr getTileFromPosition(sf::Vector2f vector) const;
+    Tile::Ptr getTileFromPosition(sf::Vector2<float> vector) const;
 
-    Tile::Ptr getTileFromCoordinate(sf::Vector2i vector) const;
+    Tile::Ptr getTileFromCoordinate(sf::Vector2<int> vector) const;
 
     sf::Vector2<float> getTileWindowPosition(const Tile::Ptr &tile) const;
 
@@ -53,7 +53,7 @@ private:
     sf::VertexArray m_vertices;
     sf::Texture m_tileset;
 
-    std::vector<sf::Vector2i> m_enemyPathingPoints;
+    std::vector<sf::Vector2<int>> m_enemyPathingPoints;
     std::unordered_map<TileType, sf::Rect<float>> m_tileTexCoords;
 };
 

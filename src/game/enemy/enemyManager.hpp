@@ -34,7 +34,11 @@ public:
     void handleEnemyPathing(const Grid& grid);
 
 private:
+
+    void cleanUp();
+
     std::vector<Enemy::Ptr> m_enemies;
+    std::vector<Enemy::Ptr> m_enemiesToCleanUp;
     std::unordered_map<EnemyType, sf::Rect<int>> m_enemyTexCoords;
     sf::Texture m_enemyTextureAtlas;
 };

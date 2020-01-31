@@ -15,15 +15,20 @@
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/System/Vector2.hpp>
 
-class Enemy : public GameObject {
+class Enemy : public GameObject, public std::enable_shared_from_this<Enemy> {
 public:
     using Ptr = std::shared_ptr<Enemy>;
+    using EnemyGoalHandler = std::function<void(const Enemy::Ptr&)>;
 
     explicit Enemy(unsigned int health, EnemyType type = EnemyType::GroundEnemy, bool isBoss = false);
 
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
+    void setGoalHandler(EnemyGoalHandler handler);
+
     void step();
+
+    void kill();
 
     void setDirection(Direction direction, sf::Vector2<float> targetPosition);
 
@@ -86,6 +91,9 @@ private:
 
     // Target the enemy is currently walking towards
     sf::Vector2<float> m_target;
+
+    // callback when enemy reaches end of path
+    EnemyGoalHandler m_goalHandler;
 };
 
 
