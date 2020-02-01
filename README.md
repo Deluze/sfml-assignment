@@ -35,7 +35,7 @@ The game is comparable to some known tower defense games out there.
 ## Windows:
 
 ```bash
-    git pull https://github.com/deluze/sfml-assignment
+    git clone https://github.com/deluze/sfml-assignment
     cd sfml-assignment
     vcpkg install sfml
     mkdir build
@@ -48,7 +48,7 @@ and you can now open up the solution file.
 ## Linux:
 
 ```bash
-    git pull https://github.com/deluze/sfml-assignment
+    git clone https://github.com/deluze/sfml-assignment
     cd sfml-assignment
     sudo apt-get install libsfml-dev
     mkdir build
